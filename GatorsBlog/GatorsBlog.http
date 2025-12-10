@@ -1,0 +1,6 @@
+@GatorsBlog_HostAddress = http://localhost:5233
+
+GET {{GatorsBlog_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

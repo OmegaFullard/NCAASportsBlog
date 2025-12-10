@@ -1,0 +1,42 @@
+{
+  "profiles": {
+    "http": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "WEATHER_API_KEY": "1ae7003575155485a89739412c085868",
+        "SCORES_API_URL": "https://api.livescore.com/scores",
+        "SCORES_POLL_INTERVAL_SECONDS": "15"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "http://localhost:5233"
+    },
+    "https": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://localhost:7221;http://localhost:5233"
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "WEATHER_API_KEY": "1ae7003575155485a89739412c085868"
+      }
+    }
+  },
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:25016",
+      "sslPort": 44348
+    }
+  }
+}

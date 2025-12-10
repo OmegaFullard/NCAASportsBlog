@@ -1,0 +1,2 @@
+wwwroot\follow.html
+wwwroot\index.html

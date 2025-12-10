@@ -1,0 +1,641 @@
+﻿
+/*normalize*/
+html,
+body,
+form {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font: normal 16px "Segoe UI", Arial, sans-serif;
+    color: #6082b6;
+    /*Newly Added*/
+    margin-top: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #f0f0f0;
+}
+
+/*
+background-img {
+   background: rgba(255, 255, 255, 0.8);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: fixed;
+    z-index: -1;
+    background-image: url('images/.png');
+    opacity: 0.4;
+    filter: opacity(=60);
+}*/
+
+@media only screen and (min-width: 481px) and (max-width: 720px) {
+    body {
+        font-size: 18px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    body {
+        font-size: 20px;
+    }
+}
+
+a {
+    background: transparent;
+}
+
+img {
+    border-style: none;
+    border-color: inherit;
+    border-width: 0;
+    width: 100px;
+    margin-right: 0px;
+    margin-top: 0px;
+    height: 100px;
+    margin-left: 0px;
+}
+
+#logo img {
+    max-height: 50px;
+    width: auto;
+}
+
+
+/* Style all font awesome icons */
+.fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
+}
+
+    /* Add a hover effect if you want */
+    .fa:hover {
+        opacity: 0.7;
+    }
+
+/* Set a specific color for each brand */
+
+/* Facebook */
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+}
+
+/* Twitter */
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
+}
+/* Google */
+.fa-google {
+    background: #dd4b39;
+    color: white;
+}
+
+/* LinkedIn */
+.fa-linkedin {
+    background: #007bb5;
+    color: white;
+}
+/* YouTube */
+.fa-youtube {
+    background: #bb0000;
+    color: white;
+}
+/* Instagram */
+.fa-instagram {
+    background: #125688;
+    color: white;
+}
+/* Pinterest */
+.fa-pinterest {
+    background: #cb2027;
+    color: white;
+}
+/* Snap */
+.fa-snapchat-ghost {
+    background: #fffc00;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+/* Skype */
+.fa-skype {
+    background: #00aff0;
+    color: white;
+}
+/* Android */
+.fa-android {
+    background: #a4c639;
+    color: white;
+}
+/* Dribbble? */
+.fa-dribbble {
+    background: #ea4c89;
+    color: white;
+}
+/* Vimeo */
+.fa-vimeo {
+    background: #45bbff;
+    color: white;
+}
+/* Tumblr */
+.fa-tumblr {
+    background: #2c4762;
+    color: white;
+}
+/* Vine */
+.fa-vine {
+    background: #00b489;
+    color: white;
+}
+/* Foursquare */
+.fa-foursquare {
+    background: #45bbff;
+    color: white;
+}
+/* Stumbleupon? */
+.fa-stumbleupon {
+    background: #eb4924;
+    color: white;
+}
+/* Flickr */
+.fa-flickr {
+    background: #f40083;
+    color: white;
+}
+/* Yahoo */
+.fa-yahoo {
+    background: #430297;
+    color: white;
+}
+/* Soundcloud */
+.fa-soundcloud {
+    background: #ff5500;
+    color: white;
+}
+/* Reddit */
+.fa-reddit {
+    background: #ff5700;
+    color: white;
+}
+/* RSS */
+.fa-rss {
+    background: #ff6600;
+    color: white;
+}
+
+button,
+input {
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+
+hr {
+    border-width: 1px 0 0 0;
+    border-color: #767676;
+    border-style: solid;
+}
+
+/*typography*/
+h1, h2, h3, h4, h5, h6 {
+    line-height: normal;
+}
+
+h1, h2, h3 {
+    font-weight: normal;
+    margin: .5em 0;
+}
+
+h4, h5, h6 {
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 2.25em;
+    font-weight: bold;
+    color: #6082b6;
+}
+
+h2 {
+    font-size: 1.875em;
+}
+
+h3 {
+    font-size: 1.5em;
+}
+
+h4 {
+    font-size: 1.125em
+}
+
+h5 {
+    font-size: 1em;
+}
+
+h6 {
+    font-size: .875em;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.header {
+    background: #2176d2;
+    color: #cfcfcf;
+    padding: 1rem 0;
+}
+
+    .header .logo {
+        float: left;
+        font-size: 1.5rem;
+    }
+
+    .header .nav ul {
+        list-style: none;
+        float: right;
+    }
+
+        .header .nav ul li {
+            display: inline;
+            margin-left: 20px;
+        }
+
+            .header .nav ul li a {
+                color: #96c9ff;
+                text-decoration: none;
+            }
+
+.hero {
+    background: #884dff;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+    .hero h2 {
+        margin-bottom: 1rem;
+    }
+
+    .hero .btn {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        background: #444444;
+        color: #f0f0f0;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+.about {
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.footer {
+    background: #2176d2;
+    color: #f0f0f0;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 2rem;
+}
+
+/*template*/
+#wrapper .t-container-fluid {
+    max-width: 100%;
+}
+
+#wrapper .RadButton {
+    font-size: 1em;
+}
+
+#wrapper .RadMenu,
+div.RadMenuPopup,
+#wrapper .RadMenu_Default, #wrapper .RadMenu_Default a.rmLink {
+    font-size: 1em;
+}
+
+/* Form Elements*
+--------------------------------------------------------------------------*/
+
+
+.topnav {
+    background-color: #cfcfcf;
+    width: 100%;
+    /* new features added*/
+    position: sticky;
+    z-index: 1;
+}
+
+    .topnav menu {
+        padding: 4px 0px 4px 8px;
+        /* new features added*/
+        position: sticky;
+        z-index: 1;
+    }
+
+    .topnav ul {
+        list-style: none;
+        margin: 0px;
+        padding: 0px;
+        width: auto;
+        /* new features added*/
+        position: sticky;
+        z-index: 1;
+    }
+
+    .topnav a {
+        background-color: #0f4d90;
+        /*border: 1px #1e1e2f solid;*/
+        color: #cfcfcf;
+        display: block;
+        line-height: 1.35em;
+        padding: 4px 20px;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+        .topnav a:hover {
+            background-color: #d8d4d4;
+            color: #bf9494;
+            text-decoration: none;
+        }
+
+div.topnav a:active {
+    background-color: #444444;
+    color: #f3c613;
+    text-decoration: none;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+div.sub_menu {
+    padding: 4px 0px 4px 8px;
+}
+
+    div.sub_menu ul {
+        list-style: none;
+        margin: 0px;
+        padding: 0px;
+        width: auto;
+    }
+
+        div.sub_menu ul li a, div.sub_menu ul li a:visited {
+            background-color: #96c9ff;
+            /*border: 1px #1e1e2f solid;*/
+            color: #fff;
+            display: block;
+            line-height: 1.35em;
+            padding: 4px 20px;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+            div.sub_menu ul li a:hover {
+                background-color: #DAEDFE;
+                color: #444444;
+                text-decoration: none;
+            }
+
+            div.sub_menu ul li a:active {
+                background-color: #ffefa2;
+                color: #a1a1a1;
+                text-decoration: none;
+            }
+
+/* FORM ELEMENTS   
+----------------------------------------------------------*/
+
+fieldset {
+    margin: 1em 0px;
+    padding: 1em;
+    border: 1px solid #ccc;
+}
+
+    fieldset p {
+        margin: 2px 12px 10px 10px;
+    }
+
+    fieldset.login label, fieldset.register label, fieldset.changePassword label {
+        display: block;
+    }
+
+    fieldset label.inline {
+        display: inline;
+    }
+
+legend {
+    font-size: 1.1em;
+    font-weight: 600;
+    padding: 2px 4px 8px 4px;
+}
+
+input.textEntry {
+    width: 320px;
+    border: 1px solid #ccc;
+}
+
+input.passwordEntry {
+    width: 320px;
+    border: 1px solid #ccc;
+}
+
+div.accountInfo {
+    width: 42%;
+}
+
+/* MISC  
+----------------------------------------------------------*/
+
+.clear {
+    clear: both;
+}
+
+.title {
+    display: block;
+    float: left;
+    text-align: left;
+    width: auto;
+}
+
+.loginDisplay {
+    font-size: 1.1em;
+    display: block;
+    text-align: right;
+    padding: 10px;
+    color: White;
+}
+
+    .loginDisplay a:link {
+        color: white;
+    }
+
+    .loginDisplay a:visited {
+        color: white;
+    }
+
+    .loginDisplay a:hover {
+        color: white;
+    }
+
+.failureNotification {
+    font-size: 1.2em;
+    color: Red;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.submitButton {
+    text-align: right;
+    padding-right: 10px;
+}
+
+/*checkout page*/
+
+
+.cart {
+    margin-bottom: 20px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.quantity {
+    width: 50px;
+}
+
+.price {
+    margin-left: 10px;
+}
+
+.total {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/*Login Page*/
+
+
+
+.login-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #444444;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+    button:hover {
+        background-color: #cfcfcf;
+    }
+
+/*Registration Page*/
+
+.register-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #cfcfcf;
+    color: #444444;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+    button:hover {
+        background-color: #a1a1a1;
+    }
+
+/*Bootstrap Badges*/
+
+.badge > a {
+    color: inherit;
+}
+
+/*Other. Added 12/23/24*/

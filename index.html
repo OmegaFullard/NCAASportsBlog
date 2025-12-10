@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="College Sports Blog � scores, analysis, and features covering college athletics." />
+    <title>Gator's Den</title>
+   
+
+    <!-- RSS / Open Graph / Twitter -->
+    <link rel="alternate" type="application/rss+xml" title="College Sports Blog � RSS" href="/feed.xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="College Sports Blog" />
+    <meta property="og:title" content="College Sports Blog" />
+    <meta property="og:description" content="Scores, analysis and features covering college athletics." />
+    <meta property="og:image" content="/assets/og-image.jpg" />
+    <meta property="og:url" content="https://example.com/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="College Sports Blog" />
+    <meta name="twitter:description" content="Scores, analysis and features covering college athletics." />
+    <meta name="twitter:image" content="/assets/og-image.jpg" />
+
+    <!-- Lightweight responsive styling -->
+    <style>
+        :root {
+            --bg: #0f1724;
+            --card: #0b1220;
+            --muted: #9aa7bd;
+            --accent: #ff6b35;
+            --max-width: 1100px;
+            --radius: 10px;
+            --gap: 18px;
+            font-size: 16px;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html, body {
+            height: 100%
+        }
+
+
+        body {
+            margin: 0;
+            font-family: Inter,Segoe UI,system-ui,Helvetica,Arial,sans-serif;
+            background: linear-gradient(180deg,var(--bg),#071025 60%);
+            color: #e6eef8;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.45;
+            padding: 32px;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 28px
+        }
+
+        .brand {
+            display: flex;
+            gap: 12px;
+            align-items: center
+        }
+
+        .logo {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            background: linear-gradient(135deg,var(--accent),#ff9a57);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #08101a;
+            font-size: 20px;
+            box-shadow: 0 6px 18px rgba(0,0,0,.45);
+        }
+
+        nav a {
+            color: var(--muted);
+            text-decoration: none;
+            margin-left: 16px;
+            font-weight: 600
+        }
+
+            nav a:hover {
+                color: #fff
+            }
+
+        /* Hero */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 24px;
+            margin-bottom: 28px;
+            align-items: start
+        }
+
+        .hero-card {
+            background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+            border-radius: var(--radius);
+            padding: 22px
+        }
+
+        .hero h1 {
+            margin: 0 0 8px 0;
+            font-size: 26px
+        }
+
+        .meta {
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 12px
+        }
+
+        /* Posts grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: var(--gap)
+        }
+
+        .post {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 16px;
+            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between
+        }
+
+            .post h3 {
+                margin: 0 0 8px 0;
+                font-size: 18px
+            }
+
+        .excerpt {
+            color: var(--muted);
+            font-size: 14px;
+            flex: 1
+        }
+
+        .tags {
+            margin-top: 12px;
+            font-size: 13px
+        }
+
+        .tag {
+            display: inline-block;
+            background: #0b2233;
+            padding: 6px 10px;
+            border-radius: 999px;
+            color: #9fd6ff;
+            margin-right: 8px;
+            font-weight: 600
+        }
+
+        /* Aside widgets */
+        .aside {
+            display: flex;
+            flex-direction: column;
+            gap: 12px
+        }
+
+        .widget {
+            background: var(--card);
+            padding: 14px;
+            border-radius: 10px
+        }
+
+        .schedule {
+            font-size: 14px;
+            color: var(--muted)
+        }
+
+        .subscribe input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,.06);
+            background: transparent;
+            color: inherit
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: #08101a;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer
+        }
+
+            .btn:focus {
+                outline: 3px solid rgba(255,107,53,.18)
+            }
+
+        footer {
+            margin-top: 36px;
+            color: var(--muted);
+            font-size: 13px;
+            text-align: center
+        }
+
+        /* Responsive */
+        @media (max-width:980px) {
+            .hero {
+                grid-template-columns: 1fr
+            }
+
+            .grid {
+                grid-template-columns: repeat(2,1fr)
+            }
+        }
+
+        @media (max-width:640px) {
+            body {
+                padding: 18px
+            }
+
+            .grid {
+                grid-template-columns: 1fr
+            }
+
+            nav a {
+                margin-left: 10px;
+                font-size: 14px
+            }
+
+            .hero {
+                gap: 14px
+            }
+        }
+    </style>
+
+
+   
+</head>
+<body>
+    <div class="container" role="main">
+        <header>
+          
+            <div>
+                <div style="font-weight:800;font-size:18px">
+                    <p><h1>Gator's Den Sports Blog</h1></p>
+                    <p><h2>"Only gators get out alive"</h2></p>
+
+                </div>
+                <div>
+                    <div class="logo" aria-hidden="true">
+
+                        <img src="images/GatorsBG.jpg" class="logo" >
+
+
+                    </div>
+
+                    <div style="font-size:13px;color:var(--muted)">Scores � Analysis � Features</div>
+                </div>
+            </div>
+
+            <nav aria-label="Primary">
+                <a href="#latest">Latest</a>
+                <a href="#teams">Teams</a>
+                <a href="#schedule">Schedule</a>
+                <a href="#subscribe">Subscribe</a>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <article class="hero-card" aria-labelledby="featured-title">
+                <div class="meta">Featured � Nov 15, 2025 � By Staff Writer</div>
+                <h1 id="featured-title">Rivalry Renewed: Inside This Weekend's Big Matchup</h1>
+                <p class="excerpt">In-depth preview, player matchups, tactical keys and what to expect from both teams as they square off in a season-defining meeting.</p>
+                <div style="margin-top:14px;display:flex;gap:10px;align-items:center">
+                    <a class="btn" href="#read-featured">Read Story</a>
+                    <div style="color:var(--muted);font-size:13px">5 min read</div>
+                </div>
+            </article>
+
+            <aside class="aside" aria-labelledby="aside-heading">
+                <div class="widget" id="aside-heading">
+                    <strong>Upcoming Games</strong>
+                    <div class="schedule" style="margin-top:10px">
+                        <div><strong>Sat � 1:00 PM</strong> � College A vs College B</div>
+                        <div><strong>Sat � 4:30 PM</strong> � State U vs Tech College</div>
+                        <div><strong>Sun � 7:00 PM</strong> � Northern vs Southern</div>
+                    </div>
+                </div>
+
+                <div class="widget subscribe" id="subscribe">
+
+                    <strong>Subscribe</strong>
+                    <p style="margin:8px 0 12px 0;color:var(--muted)">Get weekly highlights and analysis in your inbox.</p>
+                    <form onsubmit="event.preventDefault(); subscribe();">
+                        <label for="email" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;">Email</label>
+                        <input id="email" type="email" placeholder="you@school.edu" required />
+                        <div style="margin-top:10px;display:flex;gap:8px">
+                            <button class="btn" type="submit">Subscribe</button>
+                            <button class="btn" type="button" style="background:#12324a" onclick="document.getElementById('email').value='';">Clear</button>
+                        </div>
+                        <div id="sub-msg" style="margin-top:8px;color:var(--muted);font-size:13px" aria-live="polite"></div>
+                    </form>
+                </div>
+            </aside>
+        </section>
+
+        <section id="latest" aria-labelledby="latest-heading">
+            <h2 id="latest-heading" style="margin:0 0 14px 0">Latest Posts</h2>
+            <div class="grid" role="list">
+                <article class="post" role="listitem" aria-labelledby="p1">
+                    <div>
+                        <div class="meta">Nov 14 � Game Recap</div>
+                        <h3 id="p1">Thrilling Overtime Win Caps Season</h3>
+                        <p class="excerpt">A last-second drive and clutch defense made the difference in a game fans will remember for years.</p>
+                    </div>
+                    <div class="tags" aria-hidden="true">
+                        <span class="tag">Recap</span><span class="tag">Football</span>
+                    </div>
+                </article>
+
+                <article class="post" role="listitem" aria-labelledby="p2">
+                    <div>
+                        <div class="meta">Nov 13 � Analysis</div>
+                        <h3 id="p2">Three Keys That Decided the Matchup</h3>
+                        <p class="excerpt">Tactical shifts and matchup exploitation swung momentum in the second half.</p>
+                    </div>
+                    <div class="tags" aria-hidden="true">
+                        <span class="tag">Analysis</span><span class="tag">Strategy</span>
+                    </div>
+                </article>
+
+                <article class="post" role="listitem" aria-labelledby="p3">
+                    <div>
+                        <div class="meta">Nov 11 � Feature</div>
+                        <h3 id="p3">Rising Star: A Freshman Making Waves</h3>
+                        <p class="excerpt">Profile of a freshman whose play and leadership have accelerated their team's turnaround.</p>
+                    </div>
+                    <div class="tags" aria-hidden="true">
+                        <span class="tag">Feature</span><span class="tag">Player</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <footer>
+            <div>� <span id="year"></span> College Sports Blog � Built for fans and student-athletes.</div>
+            <div style="margin-top:8px;color:var(--muted)">Follow on <a href="follow.html" style="color:var(--muted);text-decoration:underline">X</a> � <a href="#" style="color:var(--muted);text-decoration:underline">Instagram</a></div>
+        </footer>
+    </div>
+
+
+    <!-- SignalR client + live scores script  -->
+    <script src="https://cdn.jsdelivr.net/npm/@microsoft/signalr@8.0.0/dist/browser/signalr.min.js"></script>
+    <script>
+        (function () {
+            const connection = new signalR.HubConnectionBuilder()
+                .withUrl('/hubs/scores')
+                .withAutomaticReconnect()
+                .build();
+
+            // UI targets
+            const scheduleEl = document.querySelector('.schedule');
+            const selectedGameEl = document.createElement('div');
+            const playsListEl = document.createElement('div');
+            selectedGameEl.style.marginTop = '12px';
+            playsListEl.style.marginTop = '10px';
+            playsListEl.style.maxHeight = '220px';
+            playsListEl.style.overflow = 'auto';
+            scheduleEl.parentElement.appendChild(selectedGameEl);
+            scheduleEl.parentElement.appendChild(playsListEl);
+
+            let currentGameId = null;
+
+            // SignalR handlers
+            connection.on('PlayEvent', play => {
+                if (!currentGameId || String(play.GameId) !== String(currentGameId)) return;
+                prependPlay(play);
+            });
+
+            connection.on('ScoreUpdated', game => {
+                if (!currentGameId || String(game.Id) !== String(currentGameId)) return;
+                updateScoreDisplay(game);
+            });
+
+            connection.start().catch(err => console.error('SignalR connect error:', err));
+
+            // Load games from server and render schedule
+            async function loadGames() {
+                try {
+                    const res = await fetch('/api/games');
+                    const games = await res.json();
+                    renderSchedule(games);
+                } catch (e) {
+                    console.error('Failed to load games', e);
+                }
+            }
+
+            function renderSchedule(games) {
+                scheduleEl.innerHTML = '';
+                games.forEach(g => {
+                    const div = document.createElement('div');
+                    div.style.padding = '8px 0';
+                    div.style.cursor = 'pointer';
+                    div.dataset.gameId = g.Id;
+                    div.innerHTML = `<strong>${escapeHtml(g.HomeTeam)}</strong> vs <strong>${escapeHtml(g.AwayTeam)}</strong>
+            <div style="color:var(--muted);font-size:13px">Score: ${g.HomeScore} - ${g.AwayScore} � ${escapeHtml(g.Status || '')}</div>`;
+                    div.addEventListener('click', () => joinGame(g.Id));
+                    scheduleEl.appendChild(div);
+                });
+            }
+
+            async function joinGame(gameId) {
+                if (currentGameId) {
+                    try { await connection.invoke('LeaveGame', currentGameId); } catch { }
+                }
+
+                currentGameId = gameId;
+                try {
+                    await connection.invoke('JoinGame', gameId);
+                } catch (e) {
+                    console.warn('JoinGame failed', e);
+                }
+
+                // fetch latest game info and plays
+                const [gameRes, playsRes] = await Promise.all([
+                    fetch(`/api/games`),
+                    fetch(`/api/games/${gameId}/plays`)
+                ]);
+                const games = await gameRes.json();
+                const game = games.find(g => String(g.Id) === String(gameId));
+                const plays = playsRes.ok ? await playsRes.json() : [];
+
+                renderSelectedGame(game);
+                renderPlays(plays);
+            }
+
+            function renderSelectedGame(game) {
+                selectedGameEl.innerHTML = `<div style="font-weight:700">${escapeHtml(game.HomeTeam)} ${game.HomeScore} � ${escapeHtml(game.AwayTeam)} ${game.AwayScore}</div>
+          <div style="color:var(--muted);font-size:13px">${escapeHtml(game.Status || '')}</div>`;
+            }
+
+            function updateScoreDisplay(game) {
+                const el = selectedGameEl;
+                if (!el) return;
+                el.innerHTML = `<div style="font-weight:700">${escapeHtml(game.HomeTeam)} ${game.HomeScore} � ${escapeHtml(game.AwayTeam)} ${game.AwayScore}</div>
+          <div style="color:var(--muted);font-size:13px">${escapeHtml(game.Status || '')}</div>`;
+            }
+
+            function renderPlays(plays) {
+                playsListEl.innerHTML = '<strong style="display:block;margin-bottom:8px">Play-by-play</strong>';
+                plays.forEach(p => appendPlay(p, false));
+            }
+
+            function prependPlay(play) {
+                appendPlay(play, true);
+            }
+
+            function appendPlay(play, prepend = false) {
+                const item = document.createElement('div');
+                item.style.padding = '8px';
+                item.style.borderBottom = '1px solid rgba(255,255,255,0.03)';
+                item.innerHTML = `<div style="font-size:13px"><strong>${escapeHtml(play.Team || play.team || '')}</strong> � ${escapeHtml(play.Description || play.description || '')}</div>
+          <div style="color:var(--muted);font-size:12px">${escapeHtml(play.Quarter || play.quarter || '')} ${escapeHtml(play.Clock || play.clock || '')} � ${new Date(play.Timestamp || play.timestamp).toLocaleTimeString()}</div>`;
+                if (prepend) playsListEl.insertBefore(item, playsListEl.children[1] || playsListEl.firstChild);
+                else playsListEl.appendChild(item);
+            }
+
+            // Utility
+            function escapeHtml(s) {
+                return String(s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+            }
+
+            // initial load
+            loadGames();
+        })();
+    </script>
+
+    <script>
+        // Small client-side behavior � progressive enhancement only.
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        function subscribe() {
+            const email = document.getElementById('email').value.trim();
+            const msg = document.getElementById('sub-msg');
+            // Minimal validation + user feedback; replace with real submission on server integration.
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                msg.textContent = 'Please enter a valid email.';
+                return;
+            }
+            msg.textContent = 'Thanks � check your inbox for a confirmation.';
+            // For integration: POST to /api/subscribe with fetch()
+        }
+
+        // Accessibility helper: visually-hidden class fallback
+        (function () {
+            const style = document.createElement('style');
+            style.textContent = '.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}';
+            document.head.appendChild(style);
+        })();
+    </script>
+</body>
+</html>

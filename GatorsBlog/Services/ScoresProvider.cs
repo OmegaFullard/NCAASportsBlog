@@ -1,0 +1,53 @@
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using CollegeSportsBlog.Models;
+
+namespace CollegeSportsBlog.Services
+{
+    // Basic HTTP-based scores provider. Adapt the JSON parsing to the provider's schema.
+    public class ScoresProvider : IScoresProvider
+    {
+        private readonly IHttpClientFactory _httpFactory;
+        private readonly IConfiguration _config;
+        private readonly ILogger<ScoresProvider> _log;
+
+        public ScoresProvider(IHttpClientFactory httpFactory, IConfiguration config, ILogger<ScoresProvider> log)
+        {
+            _httpFactory = httpFactory;
+            _config = config;
+            _log = log;
+        }
+
+        public async Task<IEnumerable<ExternalGameDto>> GetLiveGamesAsync()
+        {
+            var baseUrl = _config["SCORES_API_URL"];
+            var apiKey = _config["SCORES_API_KEY"];
+            if (string.IsNullOrEmpty(baseUrl) || string.IsNullOrEmpty(apiKey))
+            {
+                _log.LogWarning("Scores provider not configured (SCORES_API_URL / SCORES_API_KEY).");
+                return Array.Empty<ExternalGameDto>();
+            }
+
+            // Example: provider expects /live?apikey=...
+            var url = $"{baseUrl.TrimEnd('/')}/live?apikey={Uri.EscapeDataString(apiKey)}";
+            var client = _httpFactory.CreateClient("scores");
+
+            try
+            {
+                // If provider JSON does not match ExternalGameDto shape, use JsonDocument and map manually here.
+                var upstream = await client.GetFromJsonAsync<IEnumerable<ExternalGameDto>>(url);
+                return upstream ?? Array.Empty<ExternalGameDto>();
+            }
+            catch (Exception ex)
+            {
+                _log.LogError(ex, "Failed to fetch live games from provider.");
+                return Array.Empty<ExternalGameDto>();
+            }
+        }
+    }
+}

@@ -1,0 +1,207 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Follow Us — College Sports Blog</title>
+  <meta name="description" content="Follow College Sports Blog on social media for live updates, highlights and behind-the-scenes content." />
+  <link rel="alternate" type="application/rss+xml" title="College Sports Blog — RSS" href="/feed.xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Follow College Sports Blog" />
+  <meta property="og:description" content="Follow College Sports Blog on social media for live updates, highlights and behind-the-scenes content." />
+  <meta property="og:image" content="/assets/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <style>
+    :root{
+      --bg:#071025; --card:#0b1220; --muted:#9aa7bd; --accent:#ff6b35;
+      --max-width:900px; --radius:10px; --gap:14px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,Segoe UI,system-ui,Helvetica,Arial,sans-serif;color:#e6eef8;background:linear-gradient(180deg,#0f1724,var(--bg));-webkit-font-smoothing:antialiased}
+    .container{max-width:var(--max-width);margin:32px auto;padding:20px}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#ff9a57);display:flex;align-items:center;justify-content:center;color:#08101a;font-weight:800}
+    h1{margin:0 0 6px 0;font-size:20px}
+    p.lead{color:var(--muted);margin:6px 0 18px 0}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:16px;border-radius:12px;margin-bottom:14px}
+    .social-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .social{display:flex;gap:10px;align-items:center;padding:10px;border-radius:10px;background:#06121a;text-decoration:none;color:inherit}
+    .social strong{font-size:14px}
+    .social .meta{color:var(--muted);font-size:13px}
+    .rss{display:flex;gap:10px;align-items:center;margin-top:8px}
+    .subscribe-row{display:flex;gap:8px;margin-top:12px}
+    input[type="email"]{flex:1;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,.06);background:transparent;color:inherit}
+    button.btn{background:var(--accent);border:none;padding:10px 12px;border-radius:8px;font-weight:700;color:#08101a;cursor:pointer}
+    footer{margin-top:20px;color:var(--muted);font-size:13px;text-align:center}
+
+    @media (max-width:680px){
+      .social-grid{grid-template-columns:repeat(2,1fr)}
+      .container{margin:18px}
+    }
+  </style>
+</head>
+<body>
+  <div class="container" role="main">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">CS</div>
+        <div>
+          <div style="font-weight:800;font-size:16px">College Sports Blog</div>
+          <div style="font-size:13px;color:var(--muted)">Scores • Analysis • Features</div>
+        </div>
+      </div>
+      <nav aria-label="Main">
+        <a href="index.html" style="color:var(--muted);text-decoration:none;font-weight:600">Home</a>
+      </nav>
+    </header>
+
+    <h1>Follow Us</h1>
+    <p class="lead">Get live updates, highlights, behind-the-scenes and feature content. Pick your favorite platforms or subscribe to our RSS feed and newsletter.</p>
+
+    <section class="card" aria-labelledby="social-title">
+      <div id="social-title" style="display:flex;justify-content:space-between;align-items:center">
+        <strong>Social Channels</strong>
+        <a href="/feed.xml" style="color:var(--muted);text-decoration:underline">RSS</a>
+      </div>
+
+      <div class="social-grid" style="margin-top:12px">
+        <a class="social" href="https://x.com/YourHandle" target="_blank" rel="noopener noreferrer">
+          <div aria-hidden="true">🐦</div>
+          <div>
+            <strong>X</strong>
+            <div class="meta">@YourHandle · Quick updates & live reactions</div>
+          </div>
+        </a>
+
+        <a class="social" href="https://www.instagram.com/YourHandle" target="_blank" rel="noopener noreferrer">
+          <div aria-hidden="true">📸</div>
+          <div>
+            <strong>Instagram</strong>
+            <div class="meta">Highlights, reels and behind-the-scenes</div>
+          </div>
+        </a>
+
+        <a class="social" href="https://www.youtube.com/YourChannel" target="_blank" rel="noopener noreferrer">
+          <div aria-hidden="true">▶️</div>
+          <div>
+            <strong>YouTube</strong>
+            <div class="meta">Match recaps and interviews</div>
+          </div>
+        </a>
+
+        <a class="social" href="https://tiktok.com/@YourHandle" target="_blank" rel="noopener noreferrer">
+          <div aria-hidden="true">🎵</div>
+          <div>
+            <strong>TikTok</strong>
+            <div class="meta">Short-form highlights</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="rss" style="margin-top:12px">
+        <div>📡</div>
+        <div>
+          <div><strong>RSS feed</strong></div>
+          <div class="meta">Subscribe: <a href="/feed.xml" style="color:var(--muted);text-decoration:underline">/feed.xml</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="newsletter-title">
+      <div id="newsletter-title" style="display:flex;justify-content:space-between;align-items:center">
+        <strong>Newsletter</strong>
+        <div style="color:var(--muted);font-size:13px">Weekly highlights</div>
+      </div>
+
+      <p style="color:var(--muted);margin-top:10px">Enter your email to receive curated highlights and exclusive features.</p>
+
+      <form id="newsletter" onsubmit="event.preventDefault(); submitSubscribe();">
+        <div class="subscribe-row">
+          <input id="follow-email" type="email" placeholder="you@school.edu" aria-label="Email address" required />
+          <button class="btn" type="submit">Subscribe</button>
+        </div>
+        <div id="follow-msg" style="margin-top:8px;color:var(--muted);font-size:13px" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <section class="card" aria-labelledby="share-title">
+      <div id="share-title"><strong>Share the site</strong></div>
+      <p style="color:var(--muted);margin-top:8px">Quick share links — open in a new window to post.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
+        <a class="social" href="#" id="share-x" aria-label="Share on X">🐦 <strong style="margin-left:8px">Share X</strong></a>
+        <a class="social" href="#" id="share-twitter" aria-label="Share on Twitter">🐦 <strong style="margin-left:8px">Share Twitter</strong></a>
+        <a class="social" href="#" id="share-facebook" aria-label="Share on Facebook">📘 <strong style="margin-left:8px">Share Facebook</strong></a>
+        <a class="social" href="#" id="share-copy" aria-label="Copy link">🔗 <strong style="margin-left:8px">Copy Link</strong></a>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> College Sports Blog</div>
+    </footer>
+  </div>
+
+  <script>
+    // UI helpers
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    async function submitSubscribe() {
+      const emailEl = document.getElementById('follow-email');
+      const msgEl = document.getElementById('follow-msg');
+      const email = emailEl.value.trim();
+      msgEl.textContent = '';
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        msgEl.textContent = 'Please enter a valid email.';
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ Email: email })
+        });
+
+        if (res.ok) {
+          msgEl.textContent = 'Thanks — check your inbox for a confirmation.';
+          emailEl.value = '';
+        } else {
+          const body = await res.json().catch(()=>null);
+          msgEl.textContent = body?.error || 'Subscription failed.';
+        }
+      } catch (e) {
+        msgEl.textContent = 'Network error — try again later.';
+      }
+    }
+
+    // Share handlers (open known share URLs)
+    const siteUrl = location.origin + location.pathname.replace(/\/[^/]*$/, '/') ; // root
+    const shareText = encodeURIComponent('College Sports Blog — live scores and analysis');
+    const shareUrl = encodeURIComponent(siteUrl);
+
+    document.getElementById('share-x').href = `https://x.com/intent/tweet?text=${shareText}&url=${shareUrl}`;
+    document.getElementById('share-twitter').href = `https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`;
+    document.getElementById('share-facebook').href = `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`;
+    document.getElementById('share-copy').addEventListener('click', (e) => {
+      e.preventDefault();
+      navigator.clipboard?.writeText(location.origin).then(()=> {
+        const el = document.getElementById('follow-msg');
+        el.textContent = 'Link copied to clipboard.';
+      });
+    });
+  </script>
+</body>
+</html>
+```
+
+What I added
+- New `follow.html` page with consistent styling and header/footer to match `index.html`.
+- Social links (X, Instagram, YouTube, TikTok), RSS discovery link, newsletter subscribe form wired to the existing `/api/subscribe` endpoint, and convenient share buttons.
+- Accessible markup and responsive grid.
+
+Next suggestions (optional)
+- Replace placeholder social URLs (`YourHandle`) with real links.
+- Add server-side Open Graph meta for each platform-specific preview when sharing post URLs.
+- I can patch this file into the repo and add a link from `index.html` navigation to `follow.html` if you want.

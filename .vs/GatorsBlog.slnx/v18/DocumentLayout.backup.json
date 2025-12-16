@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\omega.fullard\\source\\repos\\GatorsBlog\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{02EEDB11-FD61-2437-8CFF-585C54F6E00B}|GatorsBlog\\GatorsBlog.csproj|c:\\users\\omega.fullard\\source\\repos\\gatorsblog\\gatorsblog\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02EEDB11-FD61-2437-8CFF-585C54F6E00B}|GatorsBlog\\GatorsBlog.csproj|solutionrelative:gatorsblog\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{02EEDB11-FD61-2437-8CFF-585C54F6E00B}|GatorsBlog\\GatorsBlog.csproj|c:\\users\\omega.fullard\\source\\repos\\gatorsblog\\gatorsblog\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{02EEDB11-FD61-2437-8CFF-585C54F6E00B}|GatorsBlog\\GatorsBlog.csproj|solutionrelative:gatorsblog\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -47,14 +47,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\omega.fullard\\source\\repos\\GatorsBlog\\GatorsBlog\\Program.cs",
-              "RelativeDocumentMoniker": "GatorsBlog\\Program.cs",
-              "ToolTip": "C:\\Users\\omega.fullard\\source\\repos\\GatorsBlog\\GatorsBlog\\Program.cs",
-              "RelativeToolTip": "GatorsBlog\\Program.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAiwDsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-10T17:33:35.98Z",
+              "Title": "index.html",
+              "DocumentMoniker": "C:\\Users\\omega.fullard\\source\\repos\\GatorsBlog\\GatorsBlog\\wwwroot\\index.html",
+              "RelativeDocumentMoniker": "GatorsBlog\\wwwroot\\index.html",
+              "ToolTip": "C:\\Users\\omega.fullard\\source\\repos\\GatorsBlog\\GatorsBlog\\wwwroot\\index.html",
+              "RelativeToolTip": "GatorsBlog\\wwwroot\\index.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-12-10T19:26:46.178Z",
               "EditorCaption": ""
             }
           ]

@@ -223,6 +223,7 @@ C:\Users\omega.fullard\source\repos\GatorsBlog\GatorsBlog\obj\Debug\net8.0\Gator
 C:\Users\omega.fullard\source\repos\GatorsBlog\GatorsBlog\obj\Debug\net8.0\GatorsBlog.csproj.CoreCompileInputs.cache
 C:\Users\omega.fullard\source\repos\GatorsBlog\GatorsBlog\obj\Debug\net8.0\GatorsBlog.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\omega.fullard\source\repos\GatorsBlog\GatorsBlog\obj\Debug\net8.0\GatorsBlog.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\omega.fullard\source\repos\GatorsBlog\GatorsBlog\obj\Debug\net8.0\GatorsBlog.sourcelink.json
 C:\Users\omega.fullard\source\repos\GatorsBlog\GatorsBlog\obj\Debug\net8.0\rjimswa.dswa.cache.json
 C:\Users\omega.fullard\source\repos\GatorsBlog\GatorsBlog\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 C:\Users\omega.fullard\source\repos\GatorsBlog\GatorsBlog\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json

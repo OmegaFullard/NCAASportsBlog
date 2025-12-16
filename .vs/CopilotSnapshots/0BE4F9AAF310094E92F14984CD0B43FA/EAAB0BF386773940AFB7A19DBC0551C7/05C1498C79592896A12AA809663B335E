@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -45,9 +45,9 @@
         body {
             margin: 0;
             font-family: Inter,Segoe UI,system-ui,Helvetica,Arial,sans-serif;
-            /* Background updated to use ncaateamlogosbg.jpg with increased transparency and no gradient overlay */
-            background: linear-gradient(180deg, rgba(15,23,36,0.85), rgba(15,23,36,0.85)), url('/images/ncaateamlogosbg.jpg') center/cover no-repeat;
-            color: #9aa7bd;
+            /* Background updated to use ncaateamlogosbg.jpg with a subtle dark gradient overlay */
+            background: linear-gradient(180deg, rgba(15,23,36,0.72), rgba(7,16,37,0.72) 60%), url('/images/ncaateamlogosbg.jpg') center/cover no-repeat;
+           
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             line-height: 1.45;

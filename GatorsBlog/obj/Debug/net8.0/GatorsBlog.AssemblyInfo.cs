@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GatorsBlog")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+705a39c38c469fa7cee268001c33ffd427884b38")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dc53165db902c3577405ae53fb683554e947e0ab")]
 [assembly: System.Reflection.AssemblyProductAttribute("GatorsBlog")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GatorsBlog")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

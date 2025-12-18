@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -324,9 +324,38 @@
 
         <section id="latest" aria-labelledby="latest-heading">
             <h2 id="latest-heading" style="margin:0 0 14px 0">Latest Posts</h2>
-            <div class="grid" role="list" id="articles-grid">
-                <article class="post" role="listitem">
-                    <div style="text-align:center;color:var(--muted);padding:20px">Loading articles...</div>
+            <div class="grid" role="list">
+                <article class="post" role="listitem" aria-labelledby="p1">
+                    <div>
+                        <div class="meta">Nov 14 � Game Recap</div>
+                        <h3 id="p1">Thrilling Overtime Win Caps Season</h3>
+                        <p class="excerpt">A last-second drive and clutch defense made the difference in a game fans will remember for years.</p>
+                    </div>
+                    <div class="tags" aria-hidden="true">
+                        <span class="tag">Recap</span><span class="tag">Football</span>
+                    </div>
+                </article>
+
+                <article class="post" role="listitem" aria-labelledby="p2">
+                    <div>
+                        <div class="meta">Nov 13 � Analysis</div>
+                        <h3 id="p2">Three Keys That Decided the Matchup</h3>
+                        <p class="excerpt">Tactical shifts and matchup exploitation swung momentum in the second half.</p>
+                    </div>
+                    <div class="tags" aria-hidden="true">
+                        <span class="tag">Analysis</span><span class="tag">Strategy</span>
+                    </div>
+                </article>
+
+                <article class="post" role="listitem" aria-labelledby="p3">
+                    <div>
+                        <div class="meta">Nov 11 � Feature</div>
+                        <h3 id="p3">Rising Star: A Freshman Making Waves</h3>
+                        <p class="excerpt">Profile of a freshman whose play and leadership have accelerated their team's turnaround.</p>
+                    </div>
+                    <div class="tags" aria-hidden="true">
+                        <span class="tag">Feature</span><span class="tag">Player</span>
+                    </div>
                 </article>
             </div>
         </section>
@@ -495,7 +524,7 @@
             const email = document.getElementById('email').value.trim();
             const msg = document.getElementById('sub-msg');
             // Minimal validation + user feedback; replace with real submission on server integration.
-            if (!/^[\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
                 msg.textContent = 'Please enter a valid email.';
                 return;
             }
@@ -509,52 +538,6 @@
             style.textContent = '.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}';
             document.head.appendChild(style);
         })();
-
-        // Load and display NCAA news articles
-        (async function loadArticles() {
-            try {
-                const res = await fetch('https://ncaa-api.henrygd.me/news/basketball-men/d1');
-                const data = await res.json();
-                const articlesGrid = document.getElementById('articles-grid');
-                
-                if (data.articles && data.articles.length > 0) {
-                    articlesGrid.innerHTML = '';
-                    
-                    // Display first 3 articles
-                    data.articles.slice(0, 3).forEach((article, index) => {
-                        const articleEl = document.createElement('article');
-                        articleEl.className = 'post';
-                        articleEl.setAttribute('role', 'listitem');
-                        articleEl.setAttribute('aria-labelledby', `article-${index}`);
-                        
-                        const date = new Date(article.published);
-                        const formattedDate = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-                        
-                        articleEl.innerHTML = `
-                            <div>
-                                <div class="meta">${formattedDate} � ${escapeHtml(article.source || 'NCAA')}</div>
-                                <h3 id="article-${index}">${escapeHtml(article.title)}</h3>
-                                <p class="excerpt">${escapeHtml(article.description || article.title)}</p>
-                            </div>
-                            <div style="margin-top:12px">
-                                <a href="${escapeHtml(article.link)}" target="_blank" rel="noopener noreferrer" class="btn" style="text-decoration:none;font-size:13px;padding:8px 12px">Read Article</a>
-                            </div>
-                        `;
-                        
-                        articlesGrid.appendChild(articleEl);
-                    });
-                } else {
-                    articlesGrid.innerHTML = '<div style="text-align:center;color:var(--muted);padding:20px">No articles available at this time.</div>';
-                }
-            } catch (e) {
-                console.error('Failed to load articles', e);
-                document.getElementById('articles-grid').innerHTML = '<div style="text-align:center;color:var(--muted);padding:20px">Unable to load articles. Please try again later.</div>';
-            }
-        })();
-
-        function escapeHtml(s) {
-            return String(s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-        }
     </script>
 </body>
 </html>

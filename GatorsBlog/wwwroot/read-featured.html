@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Featured player highlights and game analysis" />
+    <title>Featured Story - NCAA College Sports</title>
+
+    <!-- Lightweight responsive styling -->
+    <style>
+        :root {
+            --bg: #0f1724;
+            --card: #e6eef8;
+            --muted: #9aa7bd;
+            --accent: #ff6b35;
+            --max-width: 900px;
+            --radius: 10px;
+            font-size: 16px;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html, body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter,Segoe UI,system-ui,Helvetica,Arial,sans-serif;
+            background: linear-gradient(180deg, rgba(15,23,36,0.85), rgba(15,23,36,0.85)), url('/images/ncaateamlogosbg.jpg') center/cover no-repeat;
+            color: #e6eef8;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.6;
+            padding: 32px;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .back-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 24px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        article {
+            background: rgba(255,255,255,0.03);
+            border-radius: var(--radius);
+            padding: 32px;
+        }
+
+        .meta {
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            color: #e6eef8;
+            font-size: 32px;
+            margin: 0 0 24px 0;
+        }
+
+        .lead {
+            font-size: 18px;
+            color: #9aa7bd;
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+
+        .content {
+            color: #e6eef8;
+        }
+
+        .content p {
+            margin-bottom: 16px;
+        }
+
+        .content h2 {
+            color: #e6eef8;
+            font-size: 24px;
+            margin: 32px 0 16px 0;
+        }
+
+        .highlight-box {
+            background: rgba(255,107,53,0.1);
+            border-left: 4px solid var(--accent);
+            padding: 16px;
+            margin: 24px 0;
+            border-radius: 4px;
+        }
+
+        .stats-table {
+            width: 100%;
+            margin: 24px 0;
+            border-collapse: collapse;
+        }
+
+        .stats-table th {
+            background: rgba(255,255,255,0.05);
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+        }
+
+        .stats-table td {
+            padding: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        footer {
+            margin-top: 48px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        @media (max-width:640px) {
+            body {
+                padding: 18px;
+            }
+
+            article {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">? Back to Home</a>
+
+        <article id="featured-article">
+            <div class="meta">Featured · December 18, 2024 · By Staff Writer</div>
+            <h1 id="article-title">Loading...</h1>
+            <p class="lead" id="article-lead">Loading content...</p>
+            
+            <div class="content" id="article-content">
+                <!-- Content will be loaded dynamically -->
+            </div>
+        </article>
+
+        <footer>
+            <div>© <span id="year"></span> College Sports Blog · Built for fans and student-athletes.</div>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Get article ID from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const articleId = urlParams.get('id') || '1';
+
+        // Sample featured articles content
+        const articles = {
+            '1': {
+                title: 'Arizona Wildcats Mens Basketball Team Off to a Great Start',
+                meta: 'Featured · December 18, 2024 · By Staff Writer',
+                lead: 'The Wildcats have been on fire, showcasing exceptional offensive efficiency and three-point shooting in their recent stretch of games.',
+                content: `
+                    <h2>Offensive Explosion</h2>
+                    <p>The Wildcats have scored at least 1.26 points per possession in all five of their recent games, a mark they failed to reach in four of their first five contests. This dramatic improvement in offensive efficiency has been a key factor in their winning streak.</p>
+
+                    <div class="highlight-box">
+                        <strong>Key Stat:</strong> Arizona has made at least six 3-pointers in three straight games after doing it just four times in their first seven games of the season.
+                    </div>
+
+                    <h2>Player Performances</h2>
+                    <p>The team's success can be attributed to balanced scoring and improved ball movement. Multiple players have stepped up in clutch moments, showing the depth of this Wildcats roster.</p>
+
+                    <table class="stats-table">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>First 5 Games</th>
+                                <th>Last 5 Games</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Points Per Possession</td>
+                                <td>1.18</td>
+                                <td>1.26+</td>
+                            </tr>
+                            <tr>
+                                <td>3-Pointers Made (avg)</td>
+                                <td>5.6</td>
+                                <td>7.4</td>
+                            </tr>
+                            <tr>
+                                <td>Field Goal %</td>
+                                <td>44.2%</td>
+                                <td>48.7%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>Looking Ahead</h2>
+                    <p>The Wildcats face San Diego State in Phoenix on December 20, followed by a home game against Bethune Cookman on December 22. These games will be crucial as Arizona looks to maintain their momentum heading into conference play.</p>
+
+                    <p>With their improved offensive execution and growing confidence, the Wildcats are positioning themselves as a team to watch in the coming weeks. Fans can expect more high-scoring performances as the team continues to gel.</p>
+                `
+            },
+            '2': {
+                title: 'Michigan Wolverines Mens Basketball Comeback Win',
+                meta: 'Featured · December 18, 2024 · By Staff Writer',
+                lead: 'The Wolverines showed resilience and offensive firepower in their comeback victory against Maryland, erasing a nine-point deficit with a dominant second-half performance.',
+                content: `
+                    <h2>The Turning Point</h2>
+                    <p>For a stretch in Saturday's win over Maryland, Michigan's invincibility was called into question. The Wolverines trailed by nine points early in the second half, their largest deficit of the season. But what followed was a masterclass in championship basketball.</p>
+
+                    <div class="highlight-box">
+                        <strong>Explosive Second Half:</strong> Michigan put up 54 points in the final 18:48, turning a potential upset into another blowout victory.
+                    </div>
+
+                    <h2>Defensive Adjustments</h2>
+                    <p>The coaching staff made crucial defensive adjustments at halftime, switching to a more aggressive perimeter defense that disrupted Maryland's rhythm. The Wolverines forced multiple turnovers and converted them into fast-break opportunities.</p>
+
+                    <h2>Player Spotlight</h2>
+                    <p>Senior guard leadership was on full display as Michigan's backcourt took control of the game. Quick decision-making and precision passing opened up the offense, leading to high-percentage shots and momentum-changing plays.</p>
+
+                    <table class="stats-table">
+                        <thead>
+                            <tr>
+                                <th>Half</th>
+                                <th>Points</th>
+                                <th>Field Goal %</th>
+                                <th>Turnovers</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>First Half</td>
+                                <td>34</td>
+                                <td>41.2%</td>
+                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <td>Second Half</td>
+                                <td>54</td>
+                                <td>58.3%</td>
+                                <td>3</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>Next Challenge</h2>
+                    <p>Michigan faces La Salle on December 21 in what should be a tune-up game before the conference schedule intensifies. The Wolverines will look to build on their second-half performance and maintain their dominant form.</p>
+
+                    <p>This comeback win demonstrates Michigan's championship mettle and ability to adjust when faced with adversity. It's exactly the kind of experience that will prove valuable in March.</p>
+                `
+            }
+        };
+
+        // Load the article based on ID
+        const article = articles[articleId] || articles['1'];
+        
+        document.getElementById('article-title').textContent = article.title;
+        document.querySelector('.meta').textContent = article.meta;
+        document.getElementById('article-lead').textContent = article.lead;
+        document.getElementById('article-content').innerHTML = article.content;
+
+        // Update page title
+        document.title = `${article.title} - NCAA College Sports`;
+    </script>
+</body>
+</html>

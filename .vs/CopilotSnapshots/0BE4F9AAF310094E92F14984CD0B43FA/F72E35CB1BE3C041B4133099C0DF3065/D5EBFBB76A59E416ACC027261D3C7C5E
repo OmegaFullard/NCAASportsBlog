@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -295,7 +295,7 @@
 
                 </p>
                 <div style="margin-top:14px;display:flex;gap:10px;align-items:center">
-                    <a class="btn" href="read-featured.html?id=1">Player Highlight</a>
+                    <a class="btn" href="#read-featured">Player Highlight</a>
                     <div style="color:var(--muted);font-size:13px">5 min read</div>
                 </div>
             </article>
@@ -309,7 +309,7 @@
                     Next seven days: vs. La Salle (Dec. 21)
                 </p>
                 <div style="margin-top:14px;display:flex;gap:10px;align-items:center">
-                    <a class="btn" href="read-featured.html?id=2">Player Highlight</a>
+                    <a class="btn" href="#read-featured">Player Highlight</a>
                     <div style="color:var(--muted);font-size:13px">5 min read</div>
                 </div>
             </article>

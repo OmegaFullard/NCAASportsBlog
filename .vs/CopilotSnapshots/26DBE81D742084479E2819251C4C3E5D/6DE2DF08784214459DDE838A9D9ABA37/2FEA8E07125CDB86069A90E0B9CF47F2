@@ -1,0 +1,621 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="College Sports Blog � scores, analysis, and features covering college athletics." />
+    <title>NCAA College Sports</title>
+   
+
+    <!-- RSS / Open Graph / Twitter -->
+    <link rel="alternate" type="application/rss+xml" title="College Sports Blog � RSS" href="/feed.xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="College Sports Blog" />
+    <meta property="og:title" content="College Sports Blog" />
+    <meta property="og:description" content="Scores, analysis and features covering college athletics." />
+    <meta property="og:image" content="/assets/og-image.jpg" />
+    <meta property="og:url" content="https://example.com/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="College Sports Blog" />
+    <meta name="twitter:description" content="Scores, analysis and features covering college athletics." />
+    <meta name="twitter:image" content="/assets/og-image.jpg" />
+
+    <!-- Lightweight responsive styling -->
+    <style>
+        :root {
+            --bg: #0f1724;
+            --card: #e6eef8;
+            --muted: #9aa7bd;
+            --accent: #ff6b35;
+            --max-width: 1100px;
+            --radius: 10px;
+            --gap: 18px;
+            font-size: 16px;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html, body {
+            height: 100%
+        }
+
+
+        body {
+            margin: 0;
+            font-family: Inter,Segoe UI,system-ui,Helvetica,Arial,sans-serif;
+            /* Background updated to use ncaateamlogosbg.jpg with increased transparency and no gradient overlay */
+            background: linear-gradient(180deg, rgba(15,23,36,0.85), rgba(15,23,36,0.85)), url('/images/ncaateamlogosbg.jpg') center/cover no-repeat;
+            color: #9aa7bd;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.45;
+            padding: 32px;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 28px
+        }
+
+        .brand {
+            display: flex;
+            gap: 12px;
+            align-items: center
+        }
+
+        .logo {
+            width: 156px;
+            height: 156px;
+            border-radius: 12px;
+            background: linear-gradient(135deg,var(--accent),#ff9a57);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #08101a;
+            font-size: 20px;
+            box-shadow: 0 6px 18px rgba(0,0,0,.45);
+        }
+
+        nav a {
+            color: var(--muted);
+            text-decoration: none;
+            margin-left: 16px;
+            font-weight: 600
+        }
+
+            nav a:hover {
+                color: #fff
+            }
+
+        /* Hero */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 24px;
+            margin-bottom: 28px;
+            align-items: start
+        }
+
+        .hero-card {
+            background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+            border-radius: var(--radius);
+            padding: 22px
+        }
+
+        .hero h1 {
+            margin: 0 0 8px 0;
+            font-size: 26px
+        }
+
+        h1 {
+            color: #9aa7bd;
+        }
+
+        .meta {
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 12px
+        }
+
+        /* Posts grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: var(--gap)
+        }
+
+        .post {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 16px;
+            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between
+        }
+
+            .post h3 {
+                margin: 0 0 8px 0;
+                font-size: 18px
+            }
+
+        .excerpt {
+            color: var(--muted);
+            font-size: 14px;
+            flex: 1
+        }
+
+        .tags {
+            margin-top: 12px;
+            font-size: 13px
+        }
+
+        .tag {
+            display: inline-block;
+            background: #0b2233;
+            padding: 6px 10px;
+            border-radius: 999px;
+            color: #9fd6ff;
+            margin-right: 8px;
+            font-weight: 600
+        }
+
+        /* Aside widgets */
+        .aside {
+            display: flex;
+            flex-direction: column;
+            gap: 12px
+        }
+
+        .widget {
+            background: var(--card);
+            padding: 14px;
+            border-radius: 10px
+        }
+
+        .schedule {
+            font-size: 14px;
+            color: var(--muted)
+        }
+
+        .subscribe input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,.06);
+            background: transparent;
+            color: inherit
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: #08101a;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer
+        }
+
+            .btn:focus {
+                outline: 3px solid rgba(255,107,53,.18)
+            }
+
+        footer {
+            margin-top: 36px;
+            color: var(--muted);
+            font-size: 13px;
+            text-align: center
+        }
+
+        /* Responsive */
+        @media (max-width:980px) {
+            .hero {
+                grid-template-columns: 1fr
+            }
+
+            .grid {
+                grid-template-columns: repeat(2,1fr)
+            }
+        }
+
+        @media (max-width:640px) {
+            body {
+                padding: 18px
+            }
+
+            .grid {
+                grid-template-columns: 1fr
+            }
+
+            nav a {
+                margin-left: 10px;
+                font-size: 14px
+            }
+
+            .hero {
+                gap: 14px
+            }
+        }
+    </style>
+
+
+   
+</head>
+<body>
+    <div class="container" role="main">
+        <header>
+          
+            <div>
+                <div style="font-weight:800;font-size:18px">
+                    <p><h1>NCAA College Sports Blog</h1></p>
+                
+
+                </div>
+                <div>
+                    <div class="logo" aria-hidden="true">
+
+                        <img src="images/ncaa-seeklogo.png" class="logo" >
+
+
+                    </div>
+
+                    <div style="font-size:13px;color:var(--muted)">Scores � Analysis � Features</div>
+                </div>
+            </div>
+
+            <nav aria-label="Primary">
+                <a href="#latest">Latest</a>
+                <a href="#teams">Teams</a>
+                <a href="#schedule">Schedule</a>
+                <a href="#subscribe">Subscribe</a>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <article class="hero-card" aria-labelledby="featured-title">
+                <div class="meta">Featured � December 18, 2025 � By Staff Writer</div>
+                <h1 id="featured-title">Arizona Wildcats mens basketball team off to a great start</h1>
+                <p class="excerpt">
+                    The Wildcats have scored at least 1.26 points per possession in all five of those games, a mark they failed to reach in four of their first five. They have also made at least six 3s in three straight games after doing it just four times in their first seven.
+
+                    Next seven days: vs. San Diego State in Phoenix (Dec. 20), vs. Bethune Cookman (Dec. 22)
+
+                </p>
+                <div style="margin-top:14px;display:flex;gap:10px;align-items:center">
+                    <a class="btn" href="read-featured.html?id=1">Read</a>
+                    <div style="color:var(--muted);font-size:13px">5 min read</div>
+                </div>
+            </article>
+
+            <article class="hero-card" aria-labelledby="featured-title">
+                <div class="meta">Featured � December 18, 2025 � By Staff Writer</div>
+                <h1 id="featured-title">Michican Wolverines mens basketball comeback win</h1>
+                <p class="excerpt">
+                    For a stretch in Saturday's win over Maryland, Michigan's invincibility was called into question. The Wolverines trailed by nine points early in the second half, only to put up 54 points in the final 18:48 en route to another blowout win.
+
+                    Next seven days: vs. La Salle (Dec. 21)
+                </p>
+                <div style="margin-top:14px;display:flex;gap:10px;align-items:center">
+                    <a class="btn" href="read-featured.html?id=2">Read</a>
+                    <div style="color:var(--muted);font-size:13px">5 min read</div>
+                </div>
+            </article>
+
+            <aside class="aside" aria-labelledby="aside-heading">
+                <div class="widget" id="aside-heading">
+                    <strong>Upcoming Games</strong>
+                    <div class="schedule" style="margin-top:10px">
+                        <table style="width:100%">
+
+                            <tr><td>&nbsp;MATCHUP</td><td>&nbsp;</td><td>&nbsp;TIME</td>&nbsp;&nbsp;<td>TV</td>&nbsp;&nbsp;<td>&nbsp;&nbsp;&nbsp;LOCATION</td><td>&nbsp;&nbsp;&nbsp;</td></tr>
+                            <tr><td>&nbsp;HAMP</td><td>&nbsp;V JKST</td><td>&nbsp;5:OO PM</td>&nbsp;&nbsp;<td></td>&nbsp;&nbsp;<td>&nbsp;&nbsp;&nbsp;Gateway Center, College Park, GA&nbsp;&nbsp;&nbsp;</td></tr>
+                            <tr><td>&nbsp;MRRS</td><td>&nbsp;@UNCA</td><td>&nbsp;6:30 PM</td>&nbsp;&nbsp;<td></td>&nbsp;&nbsp;<td>&nbsp;&nbsp;&nbsp;Kimmel Arena, Asheville, NC&nbsp;&nbsp;&nbsp;</td></tr>
+                            <tr><td>&nbsp;CCU</td><td>&nbsp;@APP</td><td>&nbsp;6:30 PM</td>&nbsp;&nbsp;<td></td>&nbsp;&nbsp;<td>&nbsp;&nbsp;&nbsp;Holmes Convocation Center, Boone, NC&nbsp;&nbsp;&nbsp;</td></tr>
+                            <tr><td>&nbsp;SIUE</td><td>&nbsp;@EIU</td><td>&nbsp;7:00 PM</td>&nbsp;&nbsp;<td></td><td>&nbsp;&nbsp;&nbsp;Groniger Arena, Charleston, IL&nbsp;&nbsp;&nbsp;</td>></tr>
+                            <tr><td>&nbsp;WCU</td><td>&nbsp;@ 25 UGA</td><td>&nbsp;7:00 PM</td>&nbsp;&nbsp;<td></td>&nbsp;&nbsp;<td>&nbsp;&nbsp;&nbsp;Stegeman Coliseum, Athens, GA&nbsp;&nbsp;&nbsp;</td></tr>
+
+                        </table>
+                        <a href="https://www.espn.com/mens-college-basketball/schedule">Schedule</a>
+                   
+                    </div>
+                </div>
+
+                <div class="widget subscribe" id="subscribe">
+
+                    <strong>Subscribe</strong>
+                    <p style="margin:8px 0 12px 0;color:var(--muted)">Get weekly highlights and analysis in your inbox.</p>
+                    <form onsubmit="addEventListener.preventDefault(); subscribe();">
+                        <label for="email" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;">Email</label>
+                        <input id="email" type="email" placeholder="you@school.edu" required />
+                        <div style="margin-top:10px;display:flex;gap:8px">
+                            <button class="btn" type="submit">Subscribe</button>
+                            <button class="btn" type="button" style="background:#12324a" onclick="document.getElementById('email').value='';">Clear</button>
+                        </div>
+                        <div id="sub-msg" style="margin-top:8px;color:var(--muted);font-size:13px" aria-live="polite"></div>
+                    </form>
+                </div>
+            </aside>
+        </section>
+
+        <section id="latest" aria-labelledby="latest-heading">
+            <h2 id="latest-heading" style="margin:0 0 14px 0">Latest Posts</h2>
+            <div class="grid" role="list" id="articles-grid">
+                <article class="post" role="listitem">
+                    <div style="text-align:center;color:var(--muted);padding:20px">Loading articles...</div>
+                </article>
+            </div>
+        </section>
+
+        <footer>
+            <div>� <span id="year"></span> College Sports Blog � Built for fans and student-athletes.</div>
+            <div style="margin-top:8px;color:var(--muted)">Follow on <a href="follow.html" style="color:var(--muted);text-decoration:underline">X</a> � <a href="#" style="color:var(--muted);text-decoration:underline">Instagram</a></div>
+        </footer>
+    </div>
+
+
+    <!-- SignalR client + live scores script  -->
+    <script src="https://cdn.jsdelivr.net/npm/@microsoft/signalr@8.0.0/dist/browser/signalr.min.js"></script>
+    <script>
+        (function () {
+            const connection = new signalR.HubConnectionBuilder()
+                .withUrl('/hubs/scores')
+                .withAutomaticReconnect()
+                .build();
+
+            // UI targets
+            const scheduleEl = document.querySelector('.schedule');
+            const selectedGameEl = document.createElement('div');
+            const playsListEl = document.createElement('div');
+            selectedGameEl.style.marginTop = '12px';
+            playsListEl.style.marginTop = '10px';
+            playsListEl.style.maxHeight = '220px';
+            playsListEl.style.overflow = 'auto';
+            scheduleEl.parentElement.appendChild(selectedGameEl);
+            scheduleEl.parentElement.appendChild(playsListEl);
+
+            let currentGameId = null;
+
+            // SignalR handlers
+            connection.on('PlayEvent', play => {
+                if (!currentGameId || String(play.GameId) !== String(currentGameId)) return;
+                prependPlay(play);
+            });
+
+            connection.on('ScoreUpdated', game => {
+                if (!currentGameId || String(game.Id) !== String(currentGameId)) return;
+                updateScoreDisplay(game);
+            });
+
+            connection.start().catch(err => console.error('SignalR connect error:', err));
+
+            // Load games from ESPN API and render schedule
+            async function loadGames() {
+                try {
+                    const res = await fetch('https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?limit=50');
+                    const data = await res.json();
+                    
+                    // Map ESPN API structure to expected format
+                    const games = data.events?.map(evt => {
+                        const competition = evt.competitions?.[0];
+                        const competitors = competition?.competitors || [];
+                        
+                        const homeTeam = competitors.find(c => c.homeAway === 'home');
+                        const awayTeam = competitors.find(c => c.homeAway === 'away');
+                        
+                        // Parse status
+                        let status = competition?.status?.type?.shortDetail || 'Scheduled';
+                        if (competition?.status?.type?.state === 'in') {
+                            const period = competition.status.period;
+                            const clock = competition.status.displayClock;
+                            status = `${period}H - ${clock}`;
+                        }
+                        
+                        return {
+                            Id: evt.id,
+                            HomeTeam: homeTeam?.team?.shortDisplayName || homeTeam?.team?.displayName || 'TBD',
+                            AwayTeam: awayTeam?.team?.shortDisplayName || awayTeam?.team?.displayName || 'TBD',
+                            HomeScore: parseInt(homeTeam?.score) || 0,
+                            AwayScore: parseInt(awayTeam?.score) || 0,
+                            Status: status
+                        };
+                    }) || [];
+                    
+                    renderSchedule(games);
+                } catch (e) {
+                    console.error('Failed to load games', e);
+                }
+            }
+
+            function renderSchedule(games) {
+                scheduleEl.innerHTML = '';
+                games.forEach(g => {
+                    const div = document.createElement('div');
+                    div.style.padding = '8px 0';
+                    div.style.cursor = 'pointer';
+                    div.dataset.gameId = g.Id;
+                    div.innerHTML = `<strong>${escapeHtml(g.HomeTeam)}</strong> vs <strong>${escapeHtml(g.AwayTeam)}</strong>
+            <div style="color:var(--muted);font-size:13px">Score: ${g.HomeScore} - ${g.AwayScore} · ${escapeHtml(g.Status || '')}</div>`;
+                    div.addEventListener('click', () => joinGame(g.Id));
+                    scheduleEl.appendChild(div);
+                });
+            }
+
+            async function joinGame(gameId) {
+                if (currentGameId) {
+                    try { await connection.invoke('LeaveGame', currentGameId); } catch { }
+                }
+
+                currentGameId = gameId;
+                try {
+                    await connection.invoke('JoinGame', gameId);
+                } catch (e) {
+                    console.warn('JoinGame failed', e);
+                }
+
+                // fetch latest game info and plays from ESPN API
+                const [gameRes, playsRes] = await Promise.all([
+                    fetch('https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?limit=50'),
+                    fetch(`/api/games/${gameId}/plays`)
+                ]);
+                const data = await gameRes.json();
+                const eventData = data.events?.find(evt => evt.id === gameId);
+                
+                if (eventData) {
+                    const competition = eventData.competitions?.[0];
+                    const competitors = competition?.competitors || [];
+                    
+                    const homeTeam = competitors.find(c => c.homeAway === 'home');
+                    const awayTeam = competitors.find(c => c.homeAway === 'away');
+                    
+                    // Parse status
+                    let status = competition?.status?.type?.shortDetail || 'Scheduled';
+                    if (competition?.status?.type?.state === 'in') {
+                        const period = competition.status.period;
+                        const clock = competition.status.displayClock;
+                        status = `${period}H - ${clock}`;
+                    }
+                    
+                    const game = {
+                        Id: eventData.id,
+                        HomeTeam: homeTeam?.team?.shortDisplayName || homeTeam?.team?.displayName || 'TBD',
+                        AwayTeam: awayTeam?.team?.shortDisplayName || awayTeam?.team?.displayName || 'TBD',
+                        HomeScore: parseInt(homeTeam?.score) || 0,
+                        AwayScore: parseInt(awayTeam?.score) || 0,
+                        Status: status
+                    };
+                    
+                    const plays = playsRes.ok ? await playsRes.json() : [];
+                    
+                    renderSelectedGame(game);
+                    renderPlays(plays);
+                }
+            }
+
+            function renderSelectedGame(game) {
+                selectedGameEl.innerHTML = `<div style="font-weight:700">${escapeHtml(game.HomeTeam)} ${game.HomeScore} � ${escapeHtml(game.AwayTeam)} ${game.AwayScore}</div>
+          <div style="color:var(--muted);font-size:13px">${escapeHtml(game.Status || '')}</div>`;
+            }
+
+            function updateScoreDisplay(game) {
+                const el = selectedGameEl;
+                if (!el) return;
+                el.innerHTML = `<div style="font-weight:700">${escapeHtml(game.HomeTeam)} ${game.HomeScore} � ${escapeHtml(game.AwayTeam)} ${game.AwayScore}</div>
+          <div style="color:var(--muted);font-size:13px">${escapeHtml(game.Status || '')}</div>`;
+            }
+
+            function renderPlays(plays) {
+                playsListEl.innerHTML = '<strong style="display:block;margin-bottom:8px">Play-by-play</strong>';
+                plays.forEach(p => appendPlay(p, false));
+            }
+
+            function prependPlay(play) {
+                appendPlay(play, true);
+            }
+
+            function appendPlay(play, prepend = false) {
+                const item = document.createElement('div');
+                item.style.padding = '8px';
+                item.style.borderBottom = '1px solid rgba(255,255,255,0.03)';
+                item.innerHTML = `<div style="font-size:13px"><strong>${escapeHtml(play.Team || play.team || '')}</strong> � ${escapeHtml(play.Description || play.description || '')}</div>
+          <div style="color:var(--muted);font-size:12px">${escapeHtml(play.Quarter || play.quarter || '')} ${escapeHtml(play.Clock || play.clock || '')} � ${new Date(play.Timestamp || play.timestamp).toLocaleTimeString()}</div>`;
+                if (prepend) playsListEl.insertBefore(item, playsListEl.children[1] || playsListEl.firstChild);
+                else playsListEl.appendChild(item);
+            }
+
+            // Utility
+            function escapeHtml(s) {
+                return String(s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+            }
+
+            // initial load
+            loadGames();
+        })();
+    </script>
+
+    <script>
+        // Small client-side behavior � progressive enhancement only.
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        function subscribe() {
+            const email = document.getElementById('email').value.trim();
+            const msg = document.getElementById('sub-msg');
+            // Minimal validation + user feedback; replace with real submission on server integration.
+            if (!/^[\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                msg.textContent = 'Please enter a valid email.';
+                return;
+            }
+            msg.textContent = 'Thanks � check your inbox for a confirmation.';
+            // For integration: POST to /api/subscribe with fetch()
+        }
+
+        // Accessibility helper: visually-hidden class fallback
+        (function () {
+            const style = document.createElement('style');
+            style.textContent = '.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}';
+            document.head.appendChild(style);
+        })();
+
+        // Load and display ESPN college basketball news articles
+        (async function loadArticles() {
+            try {
+                const res = await fetch('https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/news');
+                const data = await res.json();
+                const articlesGrid = document.getElementById('articles-grid');
+                
+                if (data.articles && data.articles.length > 0) {
+                    articlesGrid.innerHTML = '';
+                    
+                    // Display first 3 articles
+                    data.articles.slice(0, 3).forEach((article, index) => {
+                        const articleEl = document.createElement('article');
+                        articleEl.className = 'post';
+                        articleEl.setAttribute('role', 'listitem');
+                        articleEl.setAttribute('aria-labelledby', `article-${index}`);
+                        
+                        const date = new Date(article.published);
+                        const formattedDate = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                        
+                        // Extract description from article
+                        const description = article.description || article.headline || '';
+                        
+                        articleEl.innerHTML = `
+                            <div>
+                                <div class="meta">${formattedDate} · ${escapeHtml(article.byline || 'ESPN')}</div>
+                                <h3 id="article-${index}">${escapeHtml(article.headline)}</h3>
+                                <p class="excerpt">${escapeHtml(description)}</p>
+                            </div>
+                            <div style="margin-top:12px">
+                                <a href="${escapeHtml(article.links?.web?.href || article.link || '#')}" target="_blank" rel="noopener noreferrer" class="btn" style="text-decoration:none;font-size:13px;padding:8px 12px">Read Article</a>
+                            </div>
+                        `;
+                        
+                        articlesGrid.appendChild(articleEl);
+                    });
+                } else {
+                    articlesGrid.innerHTML = '<div style="text-align:center;color:var(--muted);padding:20px">No articles available at this time.</div>';
+                }
+            } catch (e) {
+                console.error('Failed to load articles', e);
+                document.getElementById('articles-grid').innerHTML = '<div style="text-align:center;color:var(--muted);padding:20px">Unable to load articles. Please try again later.</div>';
+            }
+        })();
+
+        function escapeHtml(s) {
+            return String(s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        }
+    </script>
+</body>
+</html>

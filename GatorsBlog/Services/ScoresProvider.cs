@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -9,7 +11,7 @@ using CollegeSportsBlog.Models;
 
 namespace CollegeSportsBlog.Services
 {
-    // Basic HTTP-based scores provider. Adapt the JSON parsing to the provider's schema.
+    // ESPN API-based scores provider for college football
     public class ScoresProvider : IScoresProvider
     {
         private readonly IHttpClientFactory _httpFactory;
@@ -25,21 +27,151 @@ namespace CollegeSportsBlog.Services
 
         public async Task<IEnumerable<ExternalGameDto>> GetLiveGamesAsync()
         {
-            var baseUrl = "https://ncaa-api.henrygd.me/scoreboard/basketball-men/d1/2025";
+            // ESPN API endpoint for college football FBS games
+            var baseUrl = _config["ScoresApi:BaseUrl"] ?? "https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard";
+            var groups = _config["ScoresApi:Groups"] ?? "80"; // 80 = FBS
+            var limit = _config["ScoresApi:Limit"] ?? "50";
+            
+            var url = $"{baseUrl}?groups={groups}&limit={limit}";
             
             var client = _httpFactory.CreateClient("scores");
 
             try
             {
-                // If provider JSON does not match ExternalGameDto shape, use JsonDocument and map manually here.
-                var upstream = await client.GetFromJsonAsync<IEnumerable<ExternalGameDto>>(baseUrl);
-                return upstream ?? Array.Empty<ExternalGameDto>();
+                var response = await client.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+
+                var content = await response.Content.ReadAsStringAsync();
+                var json = JsonDocument.Parse(content);
+
+                var games = new List<ExternalGameDto>();
+
+                // Parse ESPN's JSON structure
+                if (json.RootElement.TryGetProperty("events", out var events))
+                {
+                    foreach (var evt in events.EnumerateArray())
+                    {
+                        try
+                        {
+                            var game = ParseEspnEvent(evt);
+                            if (game != null)
+                            {
+                                games.Add(game);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            _log.LogWarning(ex, "Failed to parse individual game event.");
+                        }
+                    }
+                }
+
+                _log.LogInformation("Fetched {Count} games from ESPN API.", games.Count);
+                return games;
             }
             catch (Exception ex)
             {
-                _log.LogError(ex, "Failed to fetch live games from provider.");
+                _log.LogError(ex, "Failed to fetch live games from ESPN API.");
                 return Array.Empty<ExternalGameDto>();
             }
+        }
+
+        private ExternalGameDto? ParseEspnEvent(JsonElement evt)
+        {
+            if (!evt.TryGetProperty("id", out var idElement) ||
+                !evt.TryGetProperty("competitions", out var competitions) ||
+                competitions.GetArrayLength() == 0)
+            {
+                return null;
+            }
+
+            var competition = competitions[0];
+            if (!competition.TryGetProperty("competitors", out var competitors) ||
+                competitors.GetArrayLength() < 2)
+            {
+                return null;
+            }
+
+            string? homeTeam = null, awayTeam = null;
+            int? homeScore = null, awayScore = null;
+
+            // Parse competitors (home/away)
+            foreach (var competitor in competitors.EnumerateArray())
+            {
+                if (!competitor.TryGetProperty("homeAway", out var homeAwayElement) ||
+                    !competitor.TryGetProperty("team", out var team))
+                {
+                    continue;
+                }
+
+                var homeAway = homeAwayElement.GetString();
+                var teamName = team.TryGetProperty("displayName", out var nameElement) 
+                    ? nameElement.GetString() 
+                    : null;
+                
+                var score = competitor.TryGetProperty("score", out var scoreElement) && 
+                            int.TryParse(scoreElement.GetString(), out var parsedScore)
+                    ? parsedScore
+                    : (int?)null;
+
+                if (homeAway == "home")
+                {
+                    homeTeam = teamName;
+                    homeScore = score;
+                }
+                else if (homeAway == "away")
+                {
+                    awayTeam = teamName;
+                    awayScore = score;
+                }
+            }
+
+            // Parse status
+            var status = "Scheduled";
+            if (competition.TryGetProperty("status", out var statusElement))
+            {
+                if (statusElement.TryGetProperty("type", out var typeElement) &&
+                    typeElement.TryGetProperty("state", out var stateElement))
+                {
+                    var state = stateElement.GetString();
+                    status = state switch
+                    {
+                        "pre" => "Scheduled",
+                        "in" => "Live",
+                        "post" => "Final",
+                        _ => "Scheduled"
+                    };
+
+                    // Add period and clock info if live
+                    if (state == "in" && 
+                        statusElement.TryGetProperty("period", out var periodElement) &&
+                        statusElement.TryGetProperty("displayClock", out var clockElement))
+                    {
+                        var period = periodElement.GetInt32();
+                        var clock = clockElement.GetString();
+                        status = $"Q{period} - {clock}";
+                    }
+                }
+            }
+
+            // Parse start time
+            DateTime? startTimeUtc = null;
+            if (evt.TryGetProperty("date", out var dateElement) &&
+                DateTime.TryParse(dateElement.GetString(), out var parsedDate))
+            {
+                startTimeUtc = parsedDate.ToUniversalTime();
+            }
+
+            return new ExternalGameDto
+            {
+                ExternalId = idElement.GetString(),
+                HomeTeam = homeTeam,
+                AwayTeam = awayTeam,
+                HomeScore = homeScore,
+                AwayScore = awayScore,
+                Status = status,
+                StartTimeUtc = startTimeUtc
+            };
         }
     }
 }

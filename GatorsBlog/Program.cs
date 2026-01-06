@@ -8,7 +8,7 @@ using CollegeSportsBlog.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuration (WEATHER_API_KEY should be set in environment or user secrets)
+// Configuration
 var configuration = builder.Configuration;
 
 // Add services
@@ -100,16 +100,14 @@ app.MapGet("/api/weather", async (double? lat, double? lon, string? units, IMemo
         return Results.Ok(cached);
     }
 
-    var apiKey = configuration["WEATHER_API_KEY"] ?? Environment.GetEnvironmentVariable("WEATHER_API_KEY");
-    if (string.IsNullOrWhiteSpace(apiKey))
-    {
-        return Results.Problem(detail: "Weather provider API key not configured.", statusCode: StatusCodes.Status500InternalServerError);
-    }
-
-    // Build upstream request (OpenWeatherMap)
+    // Build upstream request (Open-Meteo API - free, no API key required)
     var http = httpFactory.CreateClient();
-
-    var url = $"https://api.openweathermap.org/data/2.5/weather?lat={WebUtility.UrlEncode(lat.ToString())}&lon={WebUtility.UrlEncode(lon.ToString())}&units={WebUtility.UrlEncode(units)}&appid={WebUtility.UrlEncode(apiKey)}";
+    
+    // Open-Meteo uses temperature_unit parameter: celsius or fahrenheit
+    var temperatureUnit = units == "imperial" ? "fahrenheit" : "celsius";
+    var windspeedUnit = units == "imperial" ? "mph" : "kmh";
+    
+    var url = $"https://api.open-meteo.com/v1/forecast?latitude={WebUtility.UrlEncode(lat.ToString())}&longitude={WebUtility.UrlEncode(lon.ToString())}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&temperature_unit={temperatureUnit}&wind_speed_unit={windspeedUnit}&timezone=auto";
 
     HttpResponseMessage upstream;
     try
@@ -132,6 +130,40 @@ app.MapGet("/api/weather", async (double? lat, double? lon, string? units, IMemo
 
     using var stream = await upstream.Content.ReadAsStreamAsync();
     var doc = await JsonDocument.ParseAsync(stream);
+    
+    // Transform Open-Meteo response to match OpenWeatherMap-like structure for client compatibility
+    var openMeteoData = doc.RootElement;
+    var current = openMeteoData.GetProperty("current");
+    
+    // Map weather codes to descriptions (WMO Weather interpretation codes)
+    var weatherCode = current.GetProperty("weather_code").GetInt32();
+    var weatherDescription = GetWeatherDescription(weatherCode);
+    
+    var transformedResponse = new
+    {
+        coord = new { lat, lon },
+        weather = new[] 
+        { 
+            new 
+            { 
+                id = weatherCode,
+                main = weatherDescription.main,
+                description = weatherDescription.description,
+                icon = GetWeatherIcon(weatherCode)
+            } 
+        },
+        main = new
+        {
+            temp = current.GetProperty("temperature_2m").GetDouble(),
+            feels_like = current.GetProperty("apparent_temperature").GetDouble(),
+            humidity = current.GetProperty("relative_humidity_2m").GetInt32()
+        },
+        wind = new
+        {
+            speed = current.GetProperty("wind_speed_10m").GetDouble()
+        },
+        name = "Location" // Open-Meteo doesn't provide city name, client can use reverse geocoding if needed
+    };
 
     // Stronger caching: cache per-location + units for 120 seconds
     var cacheEntryOptions = new MemoryCacheEntryOptions
@@ -139,11 +171,51 @@ app.MapGet("/api/weather", async (double? lat, double? lon, string? units, IMemo
         AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(120),
         Priority = CacheItemPriority.High
     };
-    cache.Set(cacheKey, doc.RootElement.Clone(), cacheEntryOptions);
+    
+    var responseJson = JsonSerializer.SerializeToElement(transformedResponse);
+    cache.Set(cacheKey, responseJson, cacheEntryOptions);
 
-    return Results.Ok(doc.RootElement);
+    return Results.Ok(transformedResponse);
 })
 .RequireRateLimiting("WeatherPolicy");
+
+// Helper method to convert WMO weather codes to descriptions
+static (string main, string description) GetWeatherDescription(int code)
+{
+    return code switch
+    {
+        0 => ("Clear", "Clear sky"),
+        1 or 2 or 3 => ("Clouds", "Partly cloudy"),
+        45 or 48 => ("Fog", "Foggy"),
+        51 or 53 or 55 => ("Drizzle", "Light drizzle"),
+        56 or 57 => ("Drizzle", "Freezing drizzle"),
+        61 or 63 or 65 => ("Rain", "Rain"),
+        66 or 67 => ("Rain", "Freezing rain"),
+        71 or 73 or 75 => ("Snow", "Snow"),
+        77 => ("Snow", "Snow grains"),
+        80 or 81 or 82 => ("Rain", "Rain showers"),
+        85 or 86 => ("Snow", "Snow showers"),
+        95 => ("Thunderstorm", "Thunderstorm"),
+        96 or 99 => ("Thunderstorm", "Thunderstorm with hail"),
+        _ => ("Unknown", "Unknown conditions")
+    };
+}
+
+// Helper method to map weather codes to icon codes
+static string GetWeatherIcon(int code)
+{
+    return code switch
+    {
+        0 => "01d",
+        1 or 2 => "02d",
+        3 => "03d",
+        45 or 48 => "50d",
+        51 or 53 or 55 or 56 or 57 or 61 or 63 or 65 or 66 or 67 or 80 or 81 or 82 => "10d",
+        71 or 73 or 75 or 77 or 85 or 86 => "13d",
+        95 or 96 or 99 => "11d",
+        _ => "01d"
+    };
+}
 
 // Map SignalR hub for real-time score updates
 app.MapHub<ScoresHub>("/hubs/scores");

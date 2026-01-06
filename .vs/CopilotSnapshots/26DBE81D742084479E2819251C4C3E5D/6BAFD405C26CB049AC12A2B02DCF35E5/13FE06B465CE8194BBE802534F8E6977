@@ -1,0 +1,14 @@
+﻿{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "ScoresApi": {
+    "BaseUrl": "https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard",
+    "Groups": "80",
+    "Limit": "50"
+  }
+}

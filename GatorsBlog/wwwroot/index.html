@@ -184,6 +184,61 @@
             border-radius: 10px
         }
 
+        .weather-widget {
+            text-align: center;
+        }
+
+        .weather-temp {
+            font-size: 42px;
+            font-weight: 700;
+            color: #08101a;
+            margin: 10px 0;
+        }
+
+        .weather-icon {
+            font-size: 48px;
+            margin: 8px 0;
+        }
+
+        .weather-description {
+            color: #555;
+            font-size: 14px;
+            text-transform: capitalize;
+            margin-bottom: 10px;
+        }
+
+        .weather-details {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .weather-detail {
+            text-align: center;
+        }
+
+        .weather-detail-label {
+            font-size: 11px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .weather-detail-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #08101a;
+            margin-top: 2px;
+        }
+
+        .weather-location {
+            font-size: 12px;
+            color: #666;
+            margin-top: 8px;
+        }
+
         .schedule {
             font-size: 14px;
             color: var(--muted)
@@ -277,9 +332,10 @@
             </div>
 
             <nav aria-label="Primary">
-                <a href="#latest">Latest</a>
-                <a href="#teams">Teams</a>
+
                 <a href="#schedule">Schedule</a>
+                <a href="#latest">Latest</a>
+                <a href="follow.html">Follow Us</a>
                 <a href="#subscribe">Subscribe</a>
             </nav>
         </header>
@@ -313,57 +369,70 @@
                     <div style="color:var(--muted);font-size:13px">5 min read</div>
                 </div>
             </article>
+            </section>
+            <section id="schedule" aria-labelledby="schedule-heading">
+                <aside class="aside" aria-labelledby="aside-heading">
+                    <div class="widget" id="aside-heading">
+                        <strong>Upcoming Games</strong>
+                        <div class="schedule" style="margin-top:10px">
+                            <table style="width:100%">
 
-            <aside class="aside" aria-labelledby="aside-heading">
-                <div class="widget" id="aside-heading">
-                    <strong>Upcoming Games</strong>
-                    <div class="schedule" style="margin-top:10px">
-                        <table style="width:100%">
+                                <tr><td>&nbsp;MATCHUP</td><td>&nbsp;</td><td>&nbsp;TIME</td>&nbsp;&nbsp;<td>TV</td>&nbsp;&nbsp;<td>&nbsp;&nbsp;&nbsp;LOCATION</td><td>&nbsp;&nbsp;&nbsp;</td></tr>
+                                <tr><td>&nbsp;HAMP</td><td>&nbsp;V JKST</td><td>&nbsp;5:OO PM</td>&nbsp;&nbsp;<td></td>&nbsp;&nbsp;<td>&nbsp;&nbsp;&nbsp;Gateway Center, College Park, GA&nbsp;&nbsp;&nbsp;</td></tr>
+                                <tr><td>&nbsp;MRRS</td><td>&nbsp;@UNCA</td><td>&nbsp;6:30 PM</td>&nbsp;&nbsp;<td></td>&nbsp;&nbsp;<td>&nbsp;&nbsp;&nbsp;Kimmel Arena, Asheville, NC&nbsp;&nbsp;&nbsp;</td></tr>
+                                <tr><td>&nbsp;CCU</td><td>&nbsp;@APP</td><td>&nbsp;6:30 PM</td>&nbsp;&nbsp;<td></td>&nbsp;&nbsp;<td>&nbsp;&nbsp;&nbsp;Holmes Convocation Center, Boone, NC&nbsp;&nbsp;&nbsp;</td></tr>
+                                <tr><td>&nbsp;SIUE</td><td>&nbsp;@EIU</td><td>&nbsp;7:00 PM</td>&nbsp;&nbsp;<td></td><td>&nbsp;&nbsp;&nbsp;Groniger Arena, Charleston, IL&nbsp;&nbsp;&nbsp;</td>></tr>
+                                <tr><td>&nbsp;WCU</td><td>&nbsp;@ 25 UGA</td><td>&nbsp;7:00 PM</td>&nbsp;&nbsp;<td></td>&nbsp;&nbsp;<td>&nbsp;&nbsp;&nbsp;Stegeman Coliseum, Athens, GA&nbsp;&nbsp;&nbsp;</td></tr>
 
-                            <tr><td>&nbsp;MATCHUP</td><td>&nbsp;</td><td>&nbsp;TIME</td>&nbsp;&nbsp;<td>TV</td>&nbsp;&nbsp;<td>&nbsp;&nbsp;&nbsp;LOCATION</td><td>&nbsp;&nbsp;&nbsp;</td></tr>
-                            <tr><td>&nbsp;HAMP</td><td>&nbsp;V JKST</td><td>&nbsp;5:OO PM</td>&nbsp;&nbsp;<td></td>&nbsp;&nbsp;<td>&nbsp;&nbsp;&nbsp;Gateway Center, College Park, GA&nbsp;&nbsp;&nbsp;</td></tr>
-                            <tr><td>&nbsp;MRRS</td><td>&nbsp;@UNCA</td><td>&nbsp;6:30 PM</td>&nbsp;&nbsp;<td></td>&nbsp;&nbsp;<td>&nbsp;&nbsp;&nbsp;Kimmel Arena, Asheville, NC&nbsp;&nbsp;&nbsp;</td></tr>
-                            <tr><td>&nbsp;CCU</td><td>&nbsp;@APP</td><td>&nbsp;6:30 PM</td>&nbsp;&nbsp;<td></td>&nbsp;&nbsp;<td>&nbsp;&nbsp;&nbsp;Holmes Convocation Center, Boone, NC&nbsp;&nbsp;&nbsp;</td></tr>
-                            <tr><td>&nbsp;SIUE</td><td>&nbsp;@EIU</td><td>&nbsp;7:00 PM</td>&nbsp;&nbsp;<td></td><td>&nbsp;&nbsp;&nbsp;Groniger Arena, Charleston, IL&nbsp;&nbsp;&nbsp;</td>></tr>
-                            <tr><td>&nbsp;WCU</td><td>&nbsp;@ 25 UGA</td><td>&nbsp;7:00 PM</td>&nbsp;&nbsp;<td></td>&nbsp;&nbsp;<td>&nbsp;&nbsp;&nbsp;Stegeman Coliseum, Athens, GA&nbsp;&nbsp;&nbsp;</td></tr>
+                            </table>
+                            <a href="https://www.espn.com/mens-college-basketball/schedule">Schedule</a>
 
-                        </table>
-                        <a href="https://www.espn.com/mens-college-basketball/schedule">Schedule</a>
-                   
+                        </div>
+                    </div>
+                    </aside>
+                    </section>
+       
+            <aside class="aside" aria-labelledby="aside-heading-2">
+                <br />
+                <section id="subscribe" aria-labelledby="subscribe-heading">
+                    <div class="widget subscribe" id="subscribe">
+
+                        <strong>Subscribe</strong>
+                        <p style="margin:8px 0 12px 0;color:var(--muted)">Get weekly highlights and analysis in your inbox.</p>
+                        <form onsubmit="addEventListener.preventDefault(); subscribe();">
+                            <label for="email" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;">Email</label>
+                            <input id="email" type="email" placeholder="you@school.edu" required />
+                            <div style="margin-top:10px;display:flex;gap:8px">
+                                <button class="btn" type="submit">Subscribe</button>
+                                <button class="btn" type="button" style="background:#12324a" onclick="document.getElementById('email').value='';">Clear</button>
+                            </div>
+                            <div id="sub-msg" style="margin-top:8px;color:var(--muted);font-size:13px" aria-live="polite"></div>
+                        </form>
+                    </div>
+                </section>
+                <div class="widget weather-widget" id="weather">
+                    <strong>Local Weather</strong>
+                    <div id="weather-content" style="margin-top:10px;color:var(--muted);font-size:13px">
+                        Loading weather...
                     </div>
                 </div>
-
-                <div class="widget subscribe" id="subscribe">
-
-                    <strong>Subscribe</strong>
-                    <p style="margin:8px 0 12px 0;color:var(--muted)">Get weekly highlights and analysis in your inbox.</p>
-                    <form onsubmit="addEventListener.preventDefault(); subscribe();">
-                        <label for="email" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;">Email</label>
-                        <input id="email" type="email" placeholder="you@school.edu" required />
-                        <div style="margin-top:10px;display:flex;gap:8px">
-                            <button class="btn" type="submit">Subscribe</button>
-                            <button class="btn" type="button" style="background:#12324a" onclick="document.getElementById('email').value='';">Clear</button>
-                        </div>
-                        <div id="sub-msg" style="margin-top:8px;color:var(--muted);font-size:13px" aria-live="polite"></div>
-                    </form>
-                </div>
             </aside>
-        </section>
+           
 
-        <section id="latest" aria-labelledby="latest-heading">
-            <h2 id="latest-heading" style="margin:0 0 14px 0">Latest Posts</h2>
-            <div class="grid" role="list" id="articles-grid">
-                <article class="post" role="listitem">
-                    <div style="text-align:center;color:var(--muted);padding:20px">Loading articles...</div>
-                </article>
-            </div>
-        </section>
+            <section id="latest" aria-labelledby="latest-heading">
+                <h2 id="latest-heading" style="margin:0 0 14px 0">Latest Posts</h2>
+                <div class="grid" role="list" id="articles-grid">
+                    <article class="post" role="listitem">
+                        <div style="text-align:center;color:var(--muted);padding:20px">Loading articles...</div>
+                    </article>
+                </div>
+            </section>
 
-        <footer>
-            <div>� <span id="year"></span> College Sports Blog � Built for fans and student-athletes.</div>
-            <div style="margin-top:8px;color:var(--muted)">Follow on <a href="follow.html" style="color:var(--muted);text-decoration:underline">X</a> � <a href="#" style="color:var(--muted);text-decoration:underline">Instagram</a></div>
-        </footer>
-    </div>
+            <footer>
+                <div>� <span id="year"></span> College Sports Blog � Built for fans and student-athletes.</div>
+                <div style="margin-top:8px;color:var(--muted)">Follow on <a href="follow.html" style="color:var(--muted);text-decoration:underline">X</a> � <a href="#" style="color:var(--muted);text-decoration:underline">Instagram</a></div>
+            </footer>
+</div>
 
 
     <!-- SignalR client + live scores script  -->
@@ -401,21 +470,37 @@
 
             connection.start().catch(err => console.error('SignalR connect error:', err));
 
-            // Load games from NCAA API and render schedule
+            // Load games from ESPN API and render schedule
             async function loadGames() {
                 try {
-                    const res = await fetch('https://ncaa-api.henrygd.me/scoreboard/basketball-men/d1/2025');
+                    const res = await fetch('https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?limit=50');
                     const data = await res.json();
                     
-                    // Map NCAA API structure to expected format
-                    const games = data.games?.map(g => ({
-                        Id: g.game.gameID,
-                        HomeTeam: g.game.home.names.short || g.game.home.names.seo,
-                        AwayTeam: g.game.away.names.short || g.game.away.names.seo,
-                        HomeScore: g.game.home.score || 0,
-                        AwayScore: g.game.away.score || 0,
-                        Status: g.game.gameState
-                    })) || [];
+                    // Map ESPN API structure to expected format
+                    const games = data.events?.map(evt => {
+                        const competition = evt.competitions?.[0];
+                        const competitors = competition?.competitors || [];
+                        
+                        const homeTeam = competitors.find(c => c.homeAway === 'home');
+                        const awayTeam = competitors.find(c => c.homeAway === 'away');
+                        
+                        // Parse status
+                        let status = competition?.status?.type?.shortDetail || 'Scheduled';
+                        if (competition?.status?.type?.state === 'in') {
+                            const period = competition.status.period;
+                            const clock = competition.status.displayClock;
+                            status = `${period}H - ${clock}`;
+                        }
+                        
+                        return {
+                            Id: evt.id,
+                            HomeTeam: homeTeam?.team?.shortDisplayName || homeTeam?.team?.displayName || 'TBD',
+                            AwayTeam: awayTeam?.team?.shortDisplayName || awayTeam?.team?.displayName || 'TBD',
+                            HomeScore: parseInt(homeTeam?.score) || 0,
+                            AwayScore: parseInt(awayTeam?.score) || 0,
+                            Status: status
+                        };
+                    }) || [];
                     
                     renderSchedule(games);
                 } catch (e) {
@@ -449,22 +534,36 @@
                     console.warn('JoinGame failed', e);
                 }
 
-                // fetch latest game info and plays from NCAA API
+                // fetch latest game info and plays from ESPN API
                 const [gameRes, playsRes] = await Promise.all([
-                    fetch('https://ncaa-api.henrygd.me/scoreboard/basketball-men/d1/2025'),
+                    fetch('https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?limit=50'),
                     fetch(`/api/games/${gameId}/plays`)
                 ]);
                 const data = await gameRes.json();
-                const gameData = data.games?.find(g => g.game.gameID === gameId);
+                const eventData = data.events?.find(evt => evt.id === gameId);
                 
-                if (gameData) {
+                if (eventData) {
+                    const competition = eventData.competitions?.[0];
+                    const competitors = competition?.competitors || [];
+                    
+                    const homeTeam = competitors.find(c => c.homeAway === 'home');
+                    const awayTeam = competitors.find(c => c.homeAway === 'away');
+                    
+                    // Parse status
+                    let status = competition?.status?.type?.shortDetail || 'Scheduled';
+                    if (competition?.status?.type?.state === 'in') {
+                        const period = competition.status.period;
+                        const clock = competition.status.displayClock;
+                        status = `${period}H - ${clock}`;
+                    }
+                    
                     const game = {
-                        Id: gameData.game.gameID,
-                        HomeTeam: gameData.game.home.names.short || gameData.game.home.names.seo,
-                        AwayTeam: gameData.game.away.names.short || gameData.game.away.names.seo,
-                        HomeScore: gameData.game.home.score || 0,
-                        AwayScore: gameData.game.away.score || 0,
-                        Status: gameData.game.gameState
+                        Id: eventData.id,
+                        HomeTeam: homeTeam?.team?.shortDisplayName || homeTeam?.team?.displayName || 'TBD',
+                        AwayTeam: awayTeam?.team?.shortDisplayName || awayTeam?.team?.displayName || 'TBD',
+                        HomeScore: parseInt(homeTeam?.score) || 0,
+                        AwayScore: parseInt(awayTeam?.score) || 0,
+                        Status: status
                     };
                     
                     const plays = playsRes.ok ? await playsRes.json() : [];
@@ -538,10 +637,10 @@
             document.head.appendChild(style);
         })();
 
-        // Load and display NCAA news articles
+        // Load and display ESPN college basketball news articles
         (async function loadArticles() {
             try {
-                const res = await fetch('https://ncaa-api.henrygd.me/news/basketball-men/d1');
+                const res = await fetch('https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/news');
                 const data = await res.json();
                 const articlesGrid = document.getElementById('articles-grid');
                 
@@ -556,16 +655,19 @@
                         articleEl.setAttribute('aria-labelledby', `article-${index}`);
                         
                         const date = new Date(article.published);
-                        const formattedDate = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                        const formattedDate = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                        
+                        // Extract description from article
+                        const description = article.description || article.headline || '';
                         
                         articleEl.innerHTML = `
                             <div>
-                                <div class="meta">${formattedDate} � ${escapeHtml(article.source || 'NCAA')}</div>
-                                <h3 id="article-${index}">${escapeHtml(article.title)}</h3>
-                                <p class="excerpt">${escapeHtml(article.description || article.title)}</p>
+                                <div class="meta">${formattedDate} · ${escapeHtml(article.byline || 'ESPN')}</div>
+                                <h3 id="article-${index}">${escapeHtml(article.headline)}</h3>
+                                <p class="excerpt">${escapeHtml(description)}</p>
                             </div>
                             <div style="margin-top:12px">
-                                <a href="${escapeHtml(article.link)}" target="_blank" rel="noopener noreferrer" class="btn" style="text-decoration:none;font-size:13px;padding:8px 12px">Read Article</a>
+                                <a href="${escapeHtml(article.links?.web?.href || article.link || '#')}" target="_blank" rel="noopener noreferrer" class="btn" style="text-decoration:none;font-size:13px;padding:8px 12px">Read Article</a>
                             </div>
                         `;
                         
@@ -583,6 +685,82 @@
         function escapeHtml(s) {
             return String(s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
         }
+
+        // Weather widget functionality
+        (async function loadWeather() {
+            const weatherContent = document.getElementById('weather-content');
+            
+            // Get user's location
+            if (!navigator.geolocation) {
+                weatherContent.innerHTML = '<div style="color:var(--muted)">Geolocation not supported</div>';
+                return;
+            }
+
+            navigator.geolocation.getCurrentPosition(
+                async (position) => {
+                    const { latitude, longitude } = position.coords;
+                    
+                    try {
+                        // Fetch weather data from our API endpoint
+                        const response = await fetch(`/api/weather?lat=${latitude}&lon=${longitude}&units=imperial`);
+                        
+                        if (!response.ok) {
+                            throw new Error('Weather API request failed');
+                        }
+                        
+                        const data = await response.json();
+                        
+                        // Weather icon mapping
+                        const iconMap = {
+                            '01d': '☀️', '01n': '🌙',
+                            '02d': '⛅', '02n': '☁️',
+                            '03d': '☁️', '03n': '☁️',
+                            '04d': '☁️', '04n': '☁️',
+                            '09d': '🌧️', '09n': '🌧️',
+                            '10d': '🌦️', '10n': '🌧️',
+                            '11d': '⛈️', '11n': '⛈️',
+                            '13d': '❄️', '13n': '❄️',
+                            '50d': '🌫️', '50n': '🌫️'
+                        };
+                        
+                        const temp = Math.round(data.main.temp);
+                        const feelsLike = Math.round(data.main.feels_like);
+                        const description = data.weather[0].description;
+                        const icon = iconMap[data.weather[0].icon] || '🌤️';
+                        const humidity = data.main.humidity;
+                        const windSpeed = Math.round(data.wind.speed);
+                        
+                        weatherContent.innerHTML = `
+                            <div class="weather-icon">${icon}</div>
+                            <div class="weather-temp">${temp}°F</div>
+                            <div class="weather-description">${escapeHtml(description)}</div>
+                            <div class="weather-details">
+                                <div class="weather-detail">
+                                    <div class="weather-detail-label">Feels Like</div>
+                                    <div class="weather-detail-value">${feelsLike}°F</div>
+                                </div>
+                                <div class="weather-detail">
+                                    <div class="weather-detail-label">Humidity</div>
+                                    <div class="weather-detail-value">${humidity}%</div>
+                                </div>
+                                <div class="weather-detail">
+                                    <div class="weather-detail-label">Wind</div>
+                                    <div class="weather-detail-value">${windSpeed} mph</div>
+                                </div>
+                            </div>
+                            <div class="weather-location">${escapeHtml(data.name || 'Your Location')}</div>
+                        `;
+                    } catch (error) {
+                        console.error('Failed to load weather:', error);
+                        weatherContent.innerHTML = '<div style="color:var(--muted)">Unable to load weather data</div>';
+                    }
+                },
+                (error) => {
+                    console.error('Geolocation error:', error);
+                    weatherContent.innerHTML = '<div style="color:var(--muted)">Location access denied</div>';
+                }
+            );
+        })();
     </script>
 </body>
 </html>

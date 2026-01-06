@@ -1,0 +1,154 @@
+﻿using System.Net;
+using System.Text.Json;
+using Microsoft.AspNetCore.RateLimiting;
+using Microsoft.Extensions.Caching.Memory;
+using System.Threading.RateLimiting;
+using CollegeSportsBlog.Services;
+using CollegeSportsBlog.Hubs;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Configuration (WEATHER_API_KEY should be set in environment or user secrets)
+var configuration = builder.Configuration;
+
+// Add services
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+builder.Services.AddMemoryCache();
+
+// Register game service (required by ScorePollingService)
+builder.Services.AddSingleton<IGameService, GameService>();
+
+// Register SignalR (required by ScorePollingService for IHubContext<ScoresHub>)
+builder.Services.AddSignalR();
+
+// Register named HttpClient for scores provider with reasonable defaults and a short timeout.
+builder.Services.AddHttpClient("scores", client =>
+{
+    client.Timeout = TimeSpan.FromSeconds(10);
+});
+
+// Register the concrete scores provider - changed to Transient to avoid lifetime issues with hosted service
+builder.Services.AddTransient<IScoresProvider, ScoresProvider>();
+
+// Add hosted service for score polling
+builder.Services.AddHostedService<CollegeSportsBlog.Services.ScorePollingService>();
+
+// Rate limiting for weather endpoint: per-client IP fixed-window limiter
+builder.Services.AddRateLimiter(options =>
+{
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+
+    options.AddPolicy<string>("WeatherPolicy", httpContext =>
+    {
+        var ip = httpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+        // Allow 30 requests per minute per IP
+        return RateLimitPartition.GetFixedWindowLimiter(
+            partitionKey: ip,
+            factory: _ => new FixedWindowRateLimiterOptions
+            {
+                PermitLimit = 30,
+                Window = TimeSpan.FromMinutes(1),
+                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                QueueLimit = 0
+            });
+    });
+});
+
+var app = builder.Build();
+
+// Middleware pipeline
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
+
+// Enable static files (for index.html, CSS, JS, etc.)
+app.UseDefaultFiles(); // Serves index.html as default document
+app.UseStaticFiles();  // Enables serving static files from wwwroot
+
+app.UseAuthorization();
+
+// Apply global rate limiter middleware (endpoints opt-in by name)
+app.UseRateLimiter();
+
+// Weather proxy endpoint with caching and rate-limiting
+app.MapGet("/api/weather", async (double? lat, double? lon, string? units, IMemoryCache cache, IHttpClientFactory httpFactory, HttpContext httpContext) =>
+{
+    // Require coordinates (client widget should provide them)
+    if (lat == null || lon == null)
+    {
+        return Results.BadRequest(new { error = "lat and lon query parameters are required (e.g. /api/weather?lat=38.9&lon=-77.0)." });
+    }
+
+    // Validate units
+    units ??= "imperial"; // default to imperial (Fahrenheit)
+    units = units.ToLowerInvariant();
+    if (units != "imperial" && units != "metric")
+    {
+        return Results.BadRequest(new { error = "units must be 'imperial' or 'metric'." });
+    }
+
+    var cacheKey = $"weather:{lat}:{lon}:{units}";
+    if (cache.TryGetValue(cacheKey, out JsonElement cached))
+    {
+        return Results.Ok(cached);
+    }
+
+    var apiKey = configuration["WEATHER_API_KEY"] ?? Environment.GetEnvironmentVariable("WEATHER_API_KEY");
+    if (string.IsNullOrWhiteSpace(apiKey))
+    {
+        return Results.Problem(detail: "Weather provider API key not configured.", statusCode: StatusCodes.Status500InternalServerError);
+    }
+
+    // Build upstream request (OpenWeatherMap)
+    var http = httpFactory.CreateClient();
+
+    var url = $"https://api.openweathermap.org/data/2.5/weather?lat={WebUtility.UrlEncode(lat.ToString())}&lon={WebUtility.UrlEncode(lon.ToString())}&units={WebUtility.UrlEncode(units)}&appid={WebUtility.UrlEncode(apiKey)}";
+
+    HttpResponseMessage upstream;
+    try
+    {
+        upstream = await http.GetAsync(url);
+    }
+    catch (Exception ex)
+    {
+        return Results.Problem(detail: $"Upstream request failed: {ex.Message}", statusCode: StatusCodes.Status502BadGateway);
+    }
+
+    if (!upstream.IsSuccessStatusCode)
+    {
+        var txt = await upstream.Content.ReadAsStringAsync();
+        return Results.Json(
+            new { error = "Upstream weather API error", detail = txt },
+            statusCode: (int)upstream.StatusCode
+        );
+    }
+
+    using var stream = await upstream.Content.ReadAsStreamAsync();
+    var doc = await JsonDocument.ParseAsync(stream);
+
+    // Stronger caching: cache per-location + units for 120 seconds
+    var cacheEntryOptions = new MemoryCacheEntryOptions
+    {
+        AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(120),
+        Priority = CacheItemPriority.High
+    };
+    cache.Set(cacheKey, doc.RootElement.Clone(), cacheEntryOptions);
+
+    return Results.Ok(doc.RootElement);
+})
+.RequireRateLimiting("WeatherPolicy");
+
+// Map SignalR hub for real-time score updates
+app.MapHub<ScoresHub>("/hubs/scores");
+
+// Keep existing controllers
+app.MapControllers();
+
+app.Run();

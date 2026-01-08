@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\repos\\GatorsBlog\\GatorsBlog\\GatorsBlog.csproj": {}
+    "C:\\Users\\omega.fullard\\source\\repos\\GatorsBlog\\GatorsBlog\\GatorsBlog.csproj": {}
   },
   "projects": {
-    "D:\\repos\\GatorsBlog\\GatorsBlog\\GatorsBlog.csproj": {
+    "C:\\Users\\omega.fullard\\source\\repos\\GatorsBlog\\GatorsBlog\\GatorsBlog.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\repos\\GatorsBlog\\GatorsBlog\\GatorsBlog.csproj",
+        "projectUniqueName": "C:\\Users\\omega.fullard\\source\\repos\\GatorsBlog\\GatorsBlog\\GatorsBlog.csproj",
         "projectName": "GatorsBlog",
-        "projectPath": "D:\\repos\\GatorsBlog\\GatorsBlog\\GatorsBlog.csproj",
+        "projectPath": "C:\\Users\\omega.fullard\\source\\repos\\GatorsBlog\\GatorsBlog\\GatorsBlog.csproj",
         "packagesPath": "C:\\Users\\omega.fullard\\.nuget\\packages\\",
-        "outputPath": "D:\\repos\\GatorsBlog\\GatorsBlog\\obj\\",
+        "outputPath": "C:\\Users\\omega.fullard\\source\\repos\\GatorsBlog\\GatorsBlog\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

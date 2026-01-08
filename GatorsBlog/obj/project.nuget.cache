@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/1z8bdN3ShY=",
+  "dgSpecHash": "HAAsphWTan8=",
   "success": true,
-  "projectFilePath": "D:\\repos\\GatorsBlog\\GatorsBlog\\GatorsBlog.csproj",
+  "projectFilePath": "C:\\Users\\omega.fullard\\source\\repos\\GatorsBlog\\GatorsBlog\\GatorsBlog.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\omega.fullard\\.nuget\\packages\\bootstrap\\5.3.8\\bootstrap.5.3.8.nupkg.sha512",
     "C:\\Users\\omega.fullard\\.nuget\\packages\\font.awesome.sass\\5.15.4\\font.awesome.sass.5.15.4.nupkg.sha512",

@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\repos\\GatorsBlog\\",
+  "WorkspaceRootPath": "C:\\Users\\omega.fullard\\source\\repos\\GatorsBlog\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{02EEDB11-FD61-2437-8CFF-585C54F6E00B}|GatorsBlog\\GatorsBlog.csproj|d:\\repos\\gatorsblog\\gatorsblog\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{02EEDB11-FD61-2437-8CFF-585C54F6E00B}|GatorsBlog\\GatorsBlog.csproj|c:\\users\\omega.fullard\\source\\repos\\gatorsblog\\gatorsblog\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{02EEDB11-FD61-2437-8CFF-585C54F6E00B}|GatorsBlog\\GatorsBlog.csproj|solutionrelative:gatorsblog\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
@@ -52,11 +52,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "index.html",
-              "DocumentMoniker": "D:\\repos\\GatorsBlog\\GatorsBlog\\wwwroot\\index.html",
+              "DocumentMoniker": "C:\\Users\\omega.fullard\\source\\repos\\GatorsBlog\\GatorsBlog\\wwwroot\\index.html",
               "RelativeDocumentMoniker": "GatorsBlog\\wwwroot\\index.html",
-              "ToolTip": "D:\\repos\\GatorsBlog\\GatorsBlog\\wwwroot\\index.html",
+              "ToolTip": "C:\\Users\\omega.fullard\\source\\repos\\GatorsBlog\\GatorsBlog\\wwwroot\\index.html",
               "RelativeToolTip": "GatorsBlog\\wwwroot\\index.html",
-              "ViewState": "AgIAAE0BAAAAAAAAAAAAAFEBAAAaAAAAAAAAAA==",
+              "ViewState": "AgIAAE0BAAAAAAAAAAAAAFEBAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
               "WhenOpened": "2026-01-06T14:18:05.433Z",
               "EditorCaption": ""

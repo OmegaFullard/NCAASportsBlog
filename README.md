@@ -1,8 +1,9 @@
 # NCAA Sports Blog
 
 
+![Uploading ncaa-seeklogo1.png…]()
 
-<img width="50" height="50" alt="ncaa-seeklogo1" src="https://github.com/user-attachments/assets/6a808077-8836-44a6-8fc4-7712ff3d2d21" />
+
 
 
 

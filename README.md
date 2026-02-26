@@ -1,10 +1,6 @@
 # NCAA Sports Blog
 
-
-![Uploading ncaa-seeklogo1.png…]()
-
-
-
+<img width="100" height="100" alt="ncaa-seeklogo1" src="https://github.com/user-attachments/assets/6fa8101e-9cc2-41f9-8dc0-7cf27029e94b" />
 
 
 Welcome to the College Sports Blog! This project aims to provide fans with comprehensive coverage of college sports, including news, analysis, and commentary on games, teams, and players.

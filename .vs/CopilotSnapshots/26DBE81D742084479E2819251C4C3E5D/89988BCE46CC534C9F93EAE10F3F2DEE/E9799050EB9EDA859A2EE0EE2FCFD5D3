@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -370,9 +370,8 @@
                 <div class="meta">Featured � February 26, 2026 � By Staff Writer</div>
                 <h1 id="featured-title">Duke cruise to victory</h1>
                 <p class="excerpt">
-                    Duke Blue Devils outscored the Notre Dame Fightin' Irish 100-56. on the road at Purcell Pavilion on Tuesday, Feb. 24 as it jumped back into ACC play.
-                    The No. 1 Blue Devils (26-2, 14-1 ACC) were up 54-22 by halftime, behind 20 first half points from Cameron Boozer.
-
+                    The Duke Blue Devils outscored their opponent Notre Dame by a large margin handing them their worse home loss in years.
+                     
                     Next seven days: vs. University of Virginia (Feb 28)
 
                 </p>
@@ -564,19 +563,19 @@
 
                 // fetch latest game info and plays from ESPN API
                 const [gameRes, playsRes] = await Promise.all([
-                    fetch(`https://site.api.espn.com/apis/site/v2/sports/basketball/${currentSport}/scoreboard?limit=50`),
+                    fetch('https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?limit=50'),
                     fetch(`/api/games/${gameId}/plays`)
                 ]);
                 const data = await gameRes.json();
                 const eventData = data.events?.find(evt => evt.id === gameId);
-
+                
                 if (eventData) {
                     const competition = eventData.competitions?.[0];
                     const competitors = competition?.competitors || [];
-
+                    
                     const homeTeam = competitors.find(c => c.homeAway === 'home');
                     const awayTeam = competitors.find(c => c.homeAway === 'away');
-
+                    
                     // Parse status
                     let status = competition?.status?.type?.shortDetail || 'Scheduled';
                     if (competition?.status?.type?.state === 'in') {
@@ -584,7 +583,7 @@
                         const clock = competition.status.displayClock;
                         status = `${period}H - ${clock}`;
                     }
-
+                    
                     const game = {
                         Id: eventData.id,
                         HomeTeam: homeTeam?.team?.shortDisplayName || homeTeam?.team?.displayName || 'TBD',
@@ -593,9 +592,9 @@
                         AwayScore: parseInt(awayTeam?.score) || 0,
                         Status: status
                     };
-
+                    
                     const plays = playsRes.ok ? await playsRes.json() : [];
-
+                    
                     renderSelectedGame(game);
                     renderPlays(plays);
                 }
@@ -637,26 +636,6 @@
                 return String(s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
             }
 
-            // Sport selector event listener
-            document.getElementById('sport-selector').addEventListener('change', function(e) {
-                currentSport = e.target.value;
-
-                // Clear current game selection
-                if (currentGameId) {
-                    connection.invoke('LeaveGame', currentGameId).catch(() => {});
-                    currentGameId = null;
-                    selectedGameEl.innerHTML = '';
-                    playsListEl.innerHTML = '';
-                }
-
-                // Reload games and articles for the new sport
-                loadGames();
-                loadArticlesForSport();
-            });
-
-            // Expose loadGames for sport selector
-            window.loadGamesForSport = loadGames;
-
             // initial load
             loadGames();
         })();
@@ -686,32 +665,28 @@
         })();
 
         // Load and display ESPN college basketball news articles
-        let loadArticlesForSport = (async function loadArticles() {
-            // Get current sport from selector
-            const sportSelector = document.getElementById('sport-selector');
-            const sport = sportSelector ? sportSelector.value : 'mens-college-basketball';
-
+        (async function loadArticles() {
             try {
-                const res = await fetch(`https://site.api.espn.com/apis/site/v2/sports/basketball/${sport}/news`);
+                const res = await fetch('https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/news');
                 const data = await res.json();
                 const articlesGrid = document.getElementById('articles-grid');
-
+                
                 if (data.articles && data.articles.length > 0) {
                     articlesGrid.innerHTML = '';
-
+                    
                     // Display first 3 articles
                     data.articles.slice(0, 3).forEach((article, index) => {
                         const articleEl = document.createElement('article');
                         articleEl.className = 'post';
                         articleEl.setAttribute('role', 'listitem');
                         articleEl.setAttribute('aria-labelledby', `article-${index}`);
-
+                        
                         const date = new Date(article.published);
                         const formattedDate = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-
+                        
                         // Extract description from article
                         const description = article.description || article.headline || '';
-
+                        
                         articleEl.innerHTML = `
                             <div>
                                 <div class="meta">${formattedDate} · ${escapeHtml(article.byline || 'ESPN')}</div>
@@ -722,7 +697,7 @@
                                 <a href="${escapeHtml(article.links?.web?.href || article.link || '#')}" target="_blank" rel="noopener noreferrer" class="btn" style="text-decoration:none;font-size:13px;padding:8px 12px">Read Article</a>
                             </div>
                         `;
-
+                        
                         articlesGrid.appendChild(articleEl);
                     });
                 } else {
@@ -732,10 +707,7 @@
                 console.error('Failed to load articles', e);
                 document.getElementById('articles-grid').innerHTML = '<div style="text-align:center;color:var(--muted);padding:20px">Unable to load articles. Please try again later.</div>';
             }
-        });
-
-        // Initial load of articles
-        loadArticlesForSport();
+        })();
 
         function escapeHtml(s) {
             return String(s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
